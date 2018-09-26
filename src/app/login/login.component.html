@@ -1,0 +1,48 @@
+
+<mdb-card id="login-container" cascade="true" wider="true" reverse="true" class="my-4">
+  <!--Title-->
+  <mdb-card-header class="primary-color white-text text-center py-4">
+    <h4>
+      <strong>登录<i class="fa fa-lock px-2"> </i></strong>
+    </h4>
+  </mdb-card-header>
+  <!-- Card content -->
+  <mdb-card-body cascade="true" class="text-center">
+
+    <form class="text-left" style="color: #757575;">
+
+      <!-- Email -->
+      <div class="md-form form-sm">
+        <i class="fa fa-envelope-square prefix"></i>
+        <input type="email" id="materialLoginFormEmail"
+               data-error="账户必须为合法的邮箱地址"
+               data-success="输入正确"
+               class="form-control" mdbInputDirective>
+        <label for="materialLoginFormEmail">Account</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form form-sm">
+        <i class="fa fa-lock prefix"></i>
+        <input type="password" id="materialLoginFormPassword" class="form-control" mdbInputDirective>
+        <label for="materialLoginFormPassword">Password</label>
+      </div>
+
+
+
+      <!-- Sign in button -->
+      <button mdbBtn block="true" type="button" color="indigo" class="waves-light" mdbWavesEffect>登录</button>
+      <div class="justify-content-around" style="margin-top: 20px">
+        <small style="float: right; text-align: right">
+          <p>忘记密码？点这里
+            <a href="">找回密码</a>
+          </p>
+          <p>没有账户？点这里
+            <a href="">注册</a>
+          </p>
+        </small>
+      </div>
+    </form>
+  </mdb-card-body>
+
+</mdb-card>
