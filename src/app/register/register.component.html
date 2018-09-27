@@ -1,3 +1,58 @@
-<p>
-  register works!
-</p>
+<div class="component-container">
+  <mdb-card id="register-container" cascade="true" wider="true" reverse="true" class="my-4">
+    <!--Title-->
+    <button type="button" color="danger" rounded="true"
+            (click)="back()"
+            class="waves-light z-depth-1-half close-btn" mdbWavesEffect><i class="fa fa-close"></i></button>
+    <mdb-card-header class="primary-color white-text text-center py-4">
+      <h4>
+        <strong>注册<i class="fa fa-smile-o px-2"> </i></strong>
+      </h4>
+      <small>谎言是真相的影子，在那个影子里，能看到什么呢？</small>
+    </mdb-card-header>
+    <!-- Card content -->
+    <mdb-card-body cascade="true" class="text-center">
+
+      <form class="text-left" style="color: #757575;">
+        <!-- Email -->
+        <div class="md-form form-sm">
+          <i class="fa fa-envelope-square prefix"></i>
+          <input type="email" id="account"
+                 data-error="账户必须为合法的邮箱地址"
+                 data-success="输入正确"
+                 [formControl]="account"
+                 class="form-control" mdbInputDirective>
+          <label for="account">账户<span class="required">*</span></label>
+        </div>
+
+        <!-- Password -->
+        <div class="md-form form-sm form-item">
+          <i class="fa fa-lock prefix"></i>
+          <input type="password" id="password" class="form-control"
+                 [formControl]="password"
+                 data-success="输入正确"
+                 data-error="密码必须为8到16位字符"
+                 mdbInputDirective>
+          <label for="password">密码<span class="required">*</span></label>
+        </div>
+
+        <div class="md-form form-sm form-item">
+          <i class="fa fa-lock prefix"></i>
+          <input type="password" id="rePassword" class="form-control"
+                 [formControl]="rePassword"
+                 data-success="输入正确"
+                 data-error="密码必须为8到16位字符"
+                 mdbInputDirective>
+          <label for="rePassword">确认密码<span class="required">*</span></label>
+        </div>
+
+        <!-- Sign in button -->
+        <button mdbBtn block="true" type="button"
+                color="indigo" class="waves-light form-item"
+                (click)="register()"
+                mdbWavesEffect>提 交</button>
+      </form>
+    </mdb-card-body>
+
+  </mdb-card>
+</div>

@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #EAEAEA;
+  background-color: #F6F6F6;
+  overflow-y: scroll;
+}
+
+.component-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url("./assets/imgs/main_bg.jpg");
+}
+.content-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #F6F6F6;
 }

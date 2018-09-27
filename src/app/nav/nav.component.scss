@@ -1,0 +1,24 @@
+.nav-container {
+  width: 100%;
+  height: 52px;
+  overflow: hidden;
+  position: absolute;
+}
+.brand-text {
+  color: #4285F4;
+  font-weight: bold;
+}
+.brand-text:hover {
+  color: #0d47a1
+}
+.actived {
+  color: #175199!important;
+  border-bottom: #8590a6 solid 2px;
+}
+
+.menu-item {
+
+}
+.dropdown-container {
+  right: 40px;
+}

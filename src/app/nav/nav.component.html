@@ -1,0 +1,51 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-light white ie-nav">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand brand-text" href="#">Mevur</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item actived">
+        <a class="nav-link waves-ripple" mdbWavesEffect>主页<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-ripple" mdbWavesEffect>文章</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-ripple" mdbWavesEffect>照片</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-ripple" mdbWavesEffect>小黑屋</a>
+      </li>
+    </ul>
+    <!-- Links -->
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <i class="fa fa-user">your name</i><span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary dropdown-container" role="menu">
+          <a class="dropdown-item waves-light menu-item"
+             style="color: #8590a6!important;" mdbWavesEffect href="#">
+            <i class="fa fa-user"></i>
+            个人中心</a>
+          <a class="dropdown-item waves-light menu-item"
+             style="color: #8590a6!important;" mdbWavesEffect href="#">
+            <i class="fa fa-sign-out"></i>
+            退出登录</a>
+          <a class="dropdown-item waves-light menu-item"
+             style="color: #8590a6!important;" mdbWavesEffect href="#">
+            <i class="fa fa-info"></i>
+            关于</a>
+        </div>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
