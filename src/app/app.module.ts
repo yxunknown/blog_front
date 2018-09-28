@@ -10,13 +10,18 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { ArticlePreviewComponent } from './article-preview/article-preview.component';
+import { FindPasswordValidateComponent } from './find-password-validate/find-password-validate.component';
+import { FindPasswordResetComponent } from './find-password-reset/find-password-reset.component';
+import { BlackCardComponent } from './black-card/black-card.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'password/find/validate', component: FindPasswordValidateComponent},
+  {path: 'card/black', component: BlackCardComponent}
 ];
 
 @NgModule({
@@ -26,7 +31,10 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     NavComponent,
-    ArticlePreviewComponent
+    ArticlePreviewComponent,
+    FindPasswordValidateComponent,
+    FindPasswordResetComponent,
+    BlackCardComponent
   ],
   imports: [
     BrowserModule,

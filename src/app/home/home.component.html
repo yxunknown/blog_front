@@ -12,23 +12,59 @@
         <!-- Card -->
         <mdb-card>
           <mdb-card-body>
-            <!--Title-->
-            <mdb-card-title> <h4>Card Title</h4> </mdb-card-title>
-
-            <!--Text-->
-            <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's content. </mdb-card-text>
-
+            <div class="row">
+              <div class="col fun-item">
+                <i class="fa fa-edit"></i><br>
+                <small>添加文章</small>
+              </div>
+              <div class="col fun-item">
+                <i class="fa fa-image"></i><br>
+                <small>上传照片</small>
+              </div>
+              <div class="col fun-item">
+                <i class="fa fa-credit-card"></i><br>
+                <small>小黑卡</small>
+              </div>
+            </div>
           </mdb-card-body>
         </mdb-card>
         <mdb-card style="margin-top: 15px">
-          <mdb-card-body>
-            <!--Title-->
-            <mdb-card-title> <h4>Card Title</h4> </mdb-card-title>
-
-            <!--Text-->
-            <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's content. </mdb-card-text>
+          <mdb-card-body class="content-body">
+            <ul class="content-list">
+              <li class="waves-ripple" mdbWavesEffect>
+                <div class="content-list-item">
+                  <i class="fa fa-archive"></i> 文章 <span class="info-badge">23</span>
+                </div>
+              </li>
+              <li class="waves-ripple" mdbWavesEffect>
+                <div class="content-list-item">
+                  <i class="fa fa-image"></i> 照片 <span class="info-badge">132</span>
+                </div>
+              </li>
+              <li class="waves-ripple" mdbWavesEffect>
+                <div class="content-list-item">
+                  <i class="fa fa-music"></i> 歌单 <span class="info-badge">132</span>
+                </div>
+              <li class="waves-ripple" mdbWavesEffect>
+                <div class="content-list-item">
+                  <i class="fa fa-video-camera"></i> 电影 <span class="info-badge">132</span>
+                </div>
+              </li>
+            </ul>
           </mdb-card-body>
         </mdb-card>
+
+        <div class="footer">
+          <a mdbTooltip="查看我的github主页" placement="top"
+             class="footer-item" href="https://github.com/yxunknown"><i class="fa fa-github"></i> yxunknown</a> ·
+          <a mdbTooltip="查看我的简书主页" placement="top"
+             class="footer-item" href="https://www.jianshu.com/u/63219234cd03"><i class="fa fa-book"></i> 程屁凹</a> ·
+          <a class="footer-item" href="https://www.jianshu.com/u/63219234cd03"><i class="fa fa-code"></i> 关于我</a> <br>
+          <p>紫衣青衫打马归家，路遇伊人面似桃花。<br><br>
+            本站只是个人博客网站，不对网站内容的权威性负责。同时，网站内一切内容未经允许，不得转载。
+          </p>
+          <p>联系方式:  <i class="fa fa-envelope"></i> 991146900#qq.com </p>
+        </div>
       </div>
     </div>
   </div>
