@@ -3,6 +3,7 @@
 }
 .album-info {
   max-width: 300px;
+  min-width: 250px;
 }
 .info {
   margin-top: 10px;
@@ -10,4 +11,25 @@
   line-height: 30px;
   color: #8590a6;
   font-size: 14px;
+}
+.images-container {
+  padding: 0;
+  width: 100%;
+}
+.image-list-item {
+  width: 100%;
+  margin: 0;
+  height: 150px;
+  overflow: hidden;
+}
+.photo-item {
+  width: 200px;
+  height: 150px;
+  padding: 5px;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
