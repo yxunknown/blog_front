@@ -18,11 +18,15 @@
 .card-item {
   width: 100%;
   margin-top: 10px;
-  overflow: hidden;
 }
 .fixed {
   height: 70px;
   line-height: 70px;
   padding-left: calc(100% - 150px);
   background-color: #212121;
+}
+.left {
+  margin-top: 10px;
+  margin-right: 20px;
+  position: fixed;
 }

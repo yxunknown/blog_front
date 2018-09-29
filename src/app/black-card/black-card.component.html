@@ -1,5 +1,5 @@
 <div class="content-container">
-  <mdb-card class="black-confirm" hidden>
+  <mdb-card class="black-confirm zoomOut" *ngIf="!showContent">
     <mdb-card-header class="primary-color white-text text-center">
       <h4><i class="fa fa-lock"></i></h4>
     </mdb-card-header>
@@ -24,22 +24,25 @@
 
       <div class="row float-right">
         <button mdbBtn type="button"
+                (click)="backHome()"
                 color="dark-green" class="waves-light form-item"
                 mdbWavesEffect>返回主页
         </button>
         <button mdbBtn type="button"
+                (click)="enter()"
                 color="danger" class="waves-light form-item"
                 mdbWavesEffect><i class="fa fa-unlock"></i></button>
       </div>
 
     </mdb-card-body>
   </mdb-card>
-  <div class="black-container">
+  <div class="black-container fadeIn" *ngIf="showContent">
     <div class="row float-right fixed-top fixed">
       <div class="flex">
         <button mdbBtn type="button"
                 mdbTooltip="返回主页"
                 placement="left"
+                (click)="backHome()"
                 color="dark-green" size="sm" class="waves-light form-item"
                 mdbWavesEffect><i class="fa fa-arrow-left"></i></button>
         <button mdbBtn type="button"
@@ -469,7 +472,15 @@
       </div>
 
 
-      <div class="col-3"></div>
+      <div class="col-3">
+        <div class="left">
+          <mdb-card>
+            <mdb-card-body>
+              <small>just bb something here</small><br>
+            </mdb-card-body>
+          </mdb-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

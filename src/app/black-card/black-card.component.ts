@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-black-card',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlackCardComponent implements OnInit {
 
-  constructor() { }
+  showContent: Boolean = false;
+
+
+  constructor(
+    private route: Router) {
+
+  }
 
   ngOnInit() {
+  }
+
+  backHome() {
+    this.route.navigate(['/home']);
+  }
+
+  enter() {
+    this.showContent = true;
   }
 
 }
