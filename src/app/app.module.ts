@@ -15,6 +15,7 @@ import { FindPasswordResetComponent } from './find-password-reset/find-password-
 import { BlackCardComponent } from './black-card/black-card.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumDetailComponent } from './album-detail/album-detail.component';
+import { WriteArticleComponent } from './write-article/write-article.component';
 
 
 const appRoutes: Routes = [
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
   {path: 'password/find/validate', component: FindPasswordValidateComponent},
   {path: 'card/black', component: BlackCardComponent},
   {path: 'album', component: AlbumComponent},
-  {path: 'album/:id', component: AlbumDetailComponent}
+  {path: 'album/:id', component: AlbumDetailComponent},
+  {path: 'article/write', component: WriteArticleComponent}
 ];
 
 @NgModule({
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     FindPasswordResetComponent,
     BlackCardComponent,
     AlbumComponent,
-    AlbumDetailComponent
+    AlbumDetailComponent,
+    WriteArticleComponent
   ],
   imports: [
     BrowserModule,

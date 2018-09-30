@@ -188,7 +188,9 @@
                 <small>选取一张新照片作为相册封面</small>
               </div>
             </div>
-            <input id="cover-chose" type="file" style="display: none">
+            <input id="cover-chose" type="file" style="display: none"
+                   accept="image/bmp, image/jpeg, image/png"
+                   (change)="fileChange()">
           </div>
 
         </form>
