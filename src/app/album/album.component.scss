@@ -23,7 +23,14 @@
 .pagination-container {
   left: 30%;
   width: 40%;
+  z-index: 1000;
   position: absolute;
   margin-top: 20px;
   text-align: center;
+}
+.cover-container {
+  height: 150px;
+}
+.cover-container img {
+  height: 150px;
 }

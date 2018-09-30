@@ -15,4 +15,10 @@ export class AlbumComponent implements OnInit {
   detail() {
     this.route.navigate(['/album', 1]);
   }
+
+  choseCover() {
+    const coverInput = document.getElementById('cover-chose');
+    coverInput.click();
+    console.log(coverInput);
+  }
 }
