@@ -106,13 +106,14 @@
               <button mdbBtn type="button" color="primary"
                       mdbTooltip="上传新照片"
                       placement="top"
-                      (click)="upload()"
+                      (click)="uploadPhotoModal.show()"
                       size="sm" class="waves-light" mdbWavesEffect>
                 <i class="fa fa-plus"></i>
               </button>
               <button mdbBtn type="button" color="danger"
                       mdbTooltip="删除该相册"
                       placement="top"
+                      (click)="deleteAlbumModal.show()"
                       size="sm" class="waves-light" mdbWavesEffect>
                 <i class="fa fa-trash"></i>
               </button>
@@ -190,5 +191,67 @@
 
     </div>
 
+  </div>
+</div>
+
+<div mdbModal #uploadPhotoModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center white-text primary-color">
+        <button type="button" class="close pull-right white-text" aria-label="Close" (click)="uploadPhotoModal.hide()">
+          <i class="fa fa-close red-text"></i>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">上传照片</h4>
+      </div>
+      <div class="modal-body">
+        <form class="text-left" style="color: #757575;">
+
+          <!-- Password -->
+          <div class="md-form form-sm">
+            <i class="fa fa-info prefix"></i>
+            <input type="text" id="materialLoginFormPassword" class="form-control" mdbInputDirective>
+            <label for="materialLoginFormPassword">描述</label>
+          </div>
+
+          <div class="md-form">
+            <div class="upload-container flex-center view overlay">
+              <img id="photo-previewer" src="../../assets/imgs/main_bg.jpg">
+              <div class="mask white-text photo-info rgba-black-strong waves-light"
+                   (click)="choseFile()"
+                   mdbWavesEffect>
+                <h3>选取相片</h3>
+              </div>
+            </div>
+            <input id="file-chose" type="file" style="display: none"
+                   accept="image/bmp, image/jpeg, image/png"
+                   (change)="fileChange()">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="uploadPhotoModal.hide()" mdbWavesEffect>取消</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>上传</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div mdbModal #deleteAlbumModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center white-text danger-color">
+        <button type="button" class="close pull-right white-text" aria-label="Close" (click)="deleteAlbumModal.hide()">
+          <i class="fa fa-close white-text"></i>
+        </button>
+        <h4 class="modal-title w-100" id="label">警告</h4>
+      </div>
+      <div class="modal-body">
+        <p>确认删除相册：<span class="badge red">unsplash</span>,该相册有<span class="badge blue">23</span>张照片</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="success" class="waves-light" aria-label="Close" (click)="deleteAlbumModal.hide()" mdbWavesEffect>取消</button>
+        <button type="button" mdbBtn color="danger" class="relative waves-light" mdbWavesEffect>确认</button>
+      </div>
+    </div>
   </div>
 </div>

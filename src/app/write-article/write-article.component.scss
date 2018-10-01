@@ -1,3 +1,46 @@
 .editor-container {
-  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+}
+#editor {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+}
+#edit-area-wrapper {
+  height: 763px;
+  padding: 20px;
+}
+.edit-area {
+  float: left;
+  height: 660px;
+  position: relative;
+}
+.preview-area {
+  background-color: #ff4444;
+  float: left;
+  height: 200px;
+  position: relative;
+  display: none;
+}
+.title-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: center;
+}
+.half {
+  width: 50%;
+}
+.whole {
+  width: 100%;
+}
+.fun-btn {
+  padding: 5px 15px;
+}
+label {
+  font-size: 12px;
+  color: #8590a6;
 }

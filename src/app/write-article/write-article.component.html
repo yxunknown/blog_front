@@ -1,22 +1,80 @@
 <div class="content-container">
-  <div class="container editor-container">
+  <div class="editor-container">
     <div class="row">
       <div class="col-10">
         <mdb-card>
-          <mdb-card-body>
+          <mdb-card-body id="edit-area-wrapper">
             <!--Material textarea-->
-            <textarea type="text" id="editor" class="md-textarea" mdbInputDirective></textarea>
-
+            <div>
+              <div class="edit-area whole">
+                <mdb-card-title class="text-center">
+                  <h3><input class="title-input" type="text" placeholder="输入标题"></h3>
+                </mdb-card-title>
+                <textarea type="text" id="editor" class="md-textarea"
+                          placeholder="输入正文"
+                          mdbInputDirective></textarea>
+              </div>
+              <div class="preview-area half">
+              </div>
+            </div>
           </mdb-card-body>
         </mdb-card>
       </div>
       <div class="col-2">
         <mdb-card>
           <mdb-card-body>
-            <!--Material textarea-->
+            <label>操作</label>
+            <div class="flex-column">
+              <button mdbBtn type="button" color="success"
+                      size="sm" mdbTooltip="同步至服务器"
+                      placement="top"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-superpowers"></i>
+              </button>
+              <button mdbBtn type="button" color="primary"
+                      size="sm" mdbTooltip="插入图片"
+                      placement="top"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-image"></i>
+              </button>
+              <button mdbBtn type="button" color="primary"
+                      size="sm" mdbTooltip="保存"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-check"></i>
+              </button>
+            </div>
+            <label>编辑选项</label>
+            <div class="flex-column">
+              <button mdbBtn type="button" color="success"
+                      size="sm" mdbTooltip="使用专业版编辑器"
+                      placement="top"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-edit"></i>
+              </button>
+              <button mdbBtn type="button" color="secondary"
+                      size="sm" mdbTooltip="打开预览"
+                      placement="top"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+
+          </mdb-card-body>
+        </mdb-card>
+
+        <button mdbBtn type="button" color="primary"
+                block="true" style="margin-top: 20px;"
+                class="waves-light fun-btn" mdbWavesEffect>
+          发布文章
+        </button>
+
+        <mdb-card style="margin-top: 20px;">
+          <mdb-card-body>
+
           </mdb-card-body>
         </mdb-card>
       </div>
     </div>
   </div>
+
 </div>

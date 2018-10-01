@@ -20,6 +20,9 @@ export class WriteArticleComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    console.log('view inited');
+    console.log(document.documentElement.clientHeight);
+    console.log(window.screen.availHeight);
     this.textarea = document.getElementById('editor');
     this.stackedit.on('fileChange', (file) => {
       this.textarea.value = file.content.text;

@@ -36,4 +36,20 @@ export class AlbumDetailComponent implements OnInit {
     const gallery = new PhotoSwipe(s, Default_UI, items, option);
     (gallery as any).init();
   }
+
+  choseFile() {
+    const fileInput = document.getElementById('file-chose');
+    fileInput.click();
+  }
+
+  fileChange() {
+    const fileObj = document.getElementById('cover-chose');
+    const file = (fileObj as any).files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.addEventListener('load', function () {
+      const img = document.getElementById('photo-previewer');
+      img.setAttribute('src', reader.result);
+    });
+  }
 }
