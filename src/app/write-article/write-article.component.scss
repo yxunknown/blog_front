@@ -10,25 +10,22 @@
   resize: none;
 }
 #edit-area-wrapper {
-  height: 763px;
   padding: 20px;
 }
 .edit-area {
   float: left;
-  height: 660px;
   position: relative;
 }
 .preview-area {
-  background-color: #ff4444;
   float: left;
-  height: 200px;
   position: relative;
-  display: none;
+  //display: none;
 }
 .title-input {
   border: none;
   outline: none;
   width: 100%;
+  height: 30px;
   text-align: center;
 }
 .half {
@@ -43,4 +40,7 @@
 label {
   font-size: 12px;
   color: #8590a6;
+}
+.none {
+  display: none;
 }

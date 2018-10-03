@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import Stackedit from 'stackedit-js';
+import marked from 'marked';
 
 @Component({
   selector: 'app-write-article',
@@ -20,13 +21,19 @@ export class WriteArticleComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log('view inited');
-    console.log(document.documentElement.clientHeight);
-    console.log(window.screen.availHeight);
     this.textarea = document.getElementById('editor');
     this.stackedit.on('fileChange', (file) => {
       this.textarea.value = file.content.text;
     });
+    // init the height of editor area
+    // base on the available web height
+    const height = document.documentElement.clientHeight - 40;
+    const editor = document.getElementById('edit-area-wrapper');
+    editor.style.height = height + 'px';
+    const writeWrapper = document.getElementById('write-wrapper');
+    writeWrapper.style.height = height - 80 + 'px';
+    const mdPreviewer = document.getElementById('md-previewer');
+    mdPreviewer.style.height = height - 80 +　'px';
   }
 
   markdown() {
@@ -36,6 +43,34 @@ export class WriteArticleComponent implements OnInit {
         text: this.textarea.value // and the Markdown content.
       }
     });
+  }
+
+  openPreview() {
+    const writeWrapper = document.getElementById('write-wrapper');
+    const previewer = document.getElementById('md-previewer');
+    if (writeWrapper.classList.contains('half')) {
+      // in preview state
+      // change to full edit
+      writeWrapper.classList.remove('half');
+      writeWrapper.classList.add('whole');
+      previewer.classList.remove('half');
+      previewer.classList.add('none');
+    } else {
+      writeWrapper.classList.remove('whole');
+      writeWrapper.classList.add('half');
+      previewer.classList.remove('none');
+      previewer.classList.add('half');
+    }
+  }
+
+  syncMarkdown() {
+    const value = document.getElementById('editor').innerText;
+    console.log(value);
+    document.getElementById('md-previewer').innerHTML = marked(value);
+  }
+
+  data() {
+    alert(document.documentElement.clientHeight);
   }
 
 }

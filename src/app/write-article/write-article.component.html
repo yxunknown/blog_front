@@ -5,16 +5,17 @@
         <mdb-card>
           <mdb-card-body id="edit-area-wrapper">
             <!--Material textarea-->
+            <mdb-card-title class="text-center">
+              <h3><input class="title-input" type="text" placeholder="输入标题"></h3>
+            </mdb-card-title>
             <div>
-              <div class="edit-area whole">
-                <mdb-card-title class="text-center">
-                  <h3><input class="title-input" type="text" placeholder="输入标题"></h3>
-                </mdb-card-title>
+              <div id="write-wrapper" class="edit-area whole">
                 <textarea type="text" id="editor" class="md-textarea"
                           placeholder="输入正文"
+                          (change)="syncMarkdown()"
                           mdbInputDirective></textarea>
               </div>
-              <div class="preview-area half">
+              <div id="md-previewer" class="preview-area none animated zoomInRight">
               </div>
             </div>
           </mdb-card-body>
@@ -48,12 +49,14 @@
               <button mdbBtn type="button" color="success"
                       size="sm" mdbTooltip="使用专业版编辑器"
                       placement="top"
+                      (click)="markdown()"
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-edit"></i>
               </button>
               <button mdbBtn type="button" color="secondary"
                       size="sm" mdbTooltip="打开预览"
                       placement="top"
+                      (click)="openPreview()"
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-eye"></i>
               </button>
@@ -64,6 +67,7 @@
 
         <button mdbBtn type="button" color="primary"
                 block="true" style="margin-top: 20px;"
+                (click)="data()"
                 class="waves-light fun-btn" mdbWavesEffect>
           发布文章
         </button>

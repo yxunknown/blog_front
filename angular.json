@@ -39,7 +39,8 @@
               "node_modules/hammerjs/hammer.min.js",
               "node_modules/photoswipe/dist/photoswipe.min.js",
               "node_modules/photoswipe/dist/photoswipe-ui-default.min.js",
-              "node_Modules/stackedit-js/docs/lib/stackedit.min.js"
+              "node_modules/stackedit-js/docs/lib/stackedit.min.js",
+              "node_modules/marked/marked.min.js"
             ]
           },
           "configurations": {
