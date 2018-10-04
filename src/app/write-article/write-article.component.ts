@@ -12,6 +12,8 @@ export class WriteArticleComponent implements OnInit {
   stackedit: any;
   textarea: any;
 
+  input: string;
+
   constructor() {
     this.stackedit = new Stackedit();
   }
@@ -24,6 +26,7 @@ export class WriteArticleComponent implements OnInit {
     this.textarea = document.getElementById('editor');
     this.stackedit.on('fileChange', (file) => {
       this.textarea.value = file.content.text;
+      document.getElementById('md-previewer').innerHTML = marked(file.content.text);
     });
     // init the height of editor area
     // base on the available web height
@@ -64,9 +67,10 @@ export class WriteArticleComponent implements OnInit {
   }
 
   syncMarkdown() {
-    const value = document.getElementById('editor').innerText;
-    console.log(value);
-    document.getElementById('md-previewer').innerHTML = marked(value);
+    const value = this.textarea.value;
+    const previewer = document.getElementById('md-previewer');
+    previewer.innerHTML = marked(value);
+    previewer.scrollTo(0, previewer.scrollHeight);
   }
 
   data() {

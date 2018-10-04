@@ -19,6 +19,7 @@
 .preview-area {
   float: left;
   position: relative;
+  overflow-y: scroll;
   //display: none;
 }
 .title-input {

@@ -13,6 +13,7 @@
                 <textarea type="text" id="editor" class="md-textarea"
                           placeholder="输入正文"
                           (change)="syncMarkdown()"
+                          (input)="syncMarkdown()"
                           mdbInputDirective></textarea>
               </div>
               <div id="md-previewer" class="preview-area none animated zoomInRight">
@@ -53,13 +54,13 @@
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-edit"></i>
               </button>
-              <button mdbBtn type="button" color="secondary"
-                      size="sm" mdbTooltip="打开预览"
-                      placement="top"
-                      (click)="openPreview()"
-                      class="waves-light fun-btn" mdbWavesEffect>
-                <i class="fa fa-eye"></i>
-              </button>
+              <!--<button mdbBtn type="button" color="secondary"-->
+                      <!--size="sm" mdbTooltip="打开预览"-->
+                      <!--placement="top"-->
+                      <!--(click)="openPreview()"-->
+                      <!--class="waves-light fun-btn" mdbWavesEffect>-->
+                <!--<i class="fa fa-eye"></i>-->
+              <!--</button>-->
             </div>
 
           </mdb-card-body>
