@@ -1,3 +1,5 @@
+//@import "~bootstrap/scss/bootstrap";
+
 .editor-container {
   width: 100%;
   padding: 20px;
@@ -20,6 +22,7 @@
   float: left;
   position: relative;
   overflow-y: scroll;
+  background-color: #fcfaf2;
   //display: none;
 }
 .title-input {
@@ -44,4 +47,16 @@ label {
 }
 .none {
   display: none;
+}
+.upload-cover {
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(33, 33, 33, 0.4);
+}
+.upload-progress {
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 90px;
 }

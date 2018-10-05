@@ -2,13 +2,14 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import Stackedit from 'stackedit-js';
 import marked from 'marked';
+import {ancestorWhere} from 'tslint/lib/language/utils';
 
 @Component({
   selector: 'app-write-article',
   templateUrl: './write-article.component.html',
   styleUrls: ['./write-article.component.scss']
 })
-export class WriteArticleComponent implements OnInit {
+export class WriteArticleComponent implements OnInit, AfterViewInit {
   stackedit: any;
   textarea: any;
 
@@ -75,6 +76,54 @@ export class WriteArticleComponent implements OnInit {
 
   data() {
     alert(document.documentElement.clientHeight);
+  }
+
+  fileChanged() {
+    const fileInput = document.getElementById('fileInput');
+    const label = document.getElementById('fileTip');
+    label.innerText = (fileInput as any).value;
+    const file = (fileInput as any).files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.addEventListener('load', function () {
+      const img = document.getElementById('img-previewer');
+      img.setAttribute('src', reader.result);
+    });
+  }
+  toLocalImgChose() {
+    const localImgTab = document.getElementById('local-tab');
+    const netImgTab = document.getElementById('net-tab');
+    const localPanel = document.getElementById('pills-local');
+    const netPanel = document.getElementById('pills-net');
+    if (!localImgTab.classList.contains('active')) {
+      localImgTab.classList.add('active');
+      netImgTab.classList.remove('active');
+      localPanel.classList.add('show');
+      localPanel.classList.add('active');
+      netPanel.classList.remove('show');
+      netPanel.classList.remove('active');
+    }
+    return false;
+  }
+  toNetImgChose() {
+    const localImgTab = document.getElementById('local-tab');
+    const netImgTab = document.getElementById('net-tab');
+    const localPanel = document.getElementById('pills-local');
+    const netPanel = document.getElementById('pills-net');
+    if (!netImgTab.classList.contains('active')) {
+      netImgTab.classList.add('active');
+      localImgTab.classList.remove('active');
+      netPanel.classList.add('show');
+      netPanel.classList.add('active');
+      localPanel.classList.remove('show');
+      localPanel.classList.remove('active');
+    }
+    return false;
+  }
+  setNetImgPreview() {
+    const urlInput = document.getElementById('img-url');
+    const netImgPreviewer = document.getElementById('net-img-previewer');
+    netImgPreviewer.setAttribute('src', (urlInput as any).value);
   }
 
 }

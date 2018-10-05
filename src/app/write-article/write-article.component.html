@@ -36,6 +36,7 @@
               <button mdbBtn type="button" color="primary"
                       size="sm" mdbTooltip="插入图片"
                       placement="top"
+                      (click)="insertImg.show()"
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-image"></i>
               </button>
@@ -54,13 +55,13 @@
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-edit"></i>
               </button>
-              <!--<button mdbBtn type="button" color="secondary"-->
-                      <!--size="sm" mdbTooltip="打开预览"-->
-                      <!--placement="top"-->
-                      <!--(click)="openPreview()"-->
-                      <!--class="waves-light fun-btn" mdbWavesEffect>-->
-                <!--<i class="fa fa-eye"></i>-->
-              <!--</button>-->
+              <button mdbBtn type="button" color="secondary"
+                      size="sm" mdbTooltip="打开预览"
+                      placement="top"
+                      (click)="openPreview()"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-eye"></i>
+              </button>
             </div>
 
           </mdb-card-body>
@@ -75,11 +76,86 @@
 
         <mdb-card style="margin-top: 20px;">
           <mdb-card-body>
-
           </mdb-card-body>
         </mdb-card>
       </div>
     </div>
   </div>
+</div>
+<!--add image modal-->
+<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Launch demo modal</button>
 
+<div mdbModal #insertImg="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center bg-primary white-text">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="insertImg.hide()">
+          <span aria-hidden="true" class="red-text">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">添加图片</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="local-tab" data-toggle="pill" href="javascript:void(0)"
+               (click)="toLocalImgChose()"
+               role="tab" aria-controls="pills-home" aria-selected="true">
+              从本地上传
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="net-tab" data-toggle="pill" href="javascript:void(0)"
+               (click)="toNetImgChose()"
+               role="tab" aria-controls="pills-profile" aria-selected="false">
+              添加网络图片
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-local" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="fileInput"
+                       (change)="fileChanged()"
+                       aria-describedby="inputGroupFileAddon01">
+                <label id="fileTip" class="custom-file-label" for="fileInput">选取照片</label>
+              </div>
+            </div>
+            <div class="flex-center">
+              <img id="img-previewer" style="height: 200px;">
+              <div class="upload-cover">
+                <div class="progress upload-progress">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                       aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                    图片上传中，请稍后...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="pills-net" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="input-group mb-3">
+              请输入图片的<b>URL</b>地址
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3"> <b>URL</b></span>
+              </div>
+              <input type="text" class="form-control" id="img-url"
+                     (blur)="setNetImgPreview()"
+                     aria-describedby="basic-addon3">
+            </div>
+            <div class="flex-center">
+              <img id="net-img-previewer" style="height: 200px">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="insertImg.hide()" mdbWavesEffect>取消</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>插入</button>
+      </div>
+    </div>
+  </div>
 </div>
