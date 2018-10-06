@@ -16,6 +16,7 @@ import { BlackCardComponent } from './black-card/black-card.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumDetailComponent } from './album-detail/album-detail.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
+import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
 
 
 const appRoutes: Routes = [
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
   {path: 'card/black', component: BlackCardComponent},
   {path: 'album', component: AlbumComponent},
   {path: 'album/:id', component: AlbumDetailComponent},
-  {path: 'article/write', component: WriteArticleComponent}
+  {path: 'article/write', component: WriteArticleComponent},
+  {path: 'photo/upload', component: UploadPhotoComponent}
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     BlackCardComponent,
     AlbumComponent,
     AlbumDetailComponent,
-    WriteArticleComponent
+    WriteArticleComponent,
+    UploadPhotoComponent
   ],
   imports: [
     BrowserModule,
