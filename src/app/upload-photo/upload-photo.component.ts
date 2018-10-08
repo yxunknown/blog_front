@@ -43,6 +43,8 @@ export class UploadPhotoComponent implements OnInit {
   }
 
   imageReadHandler(index: Number, fileReader: FileReader) {
+
+    console.log(index);
     fileReader.addEventListener('load', function () {
       const innerHtml = $(`<img src="${fileReader.result}" class="img-fluid"/>
               <div class="mask white-text info-container rgba-black-strong">
@@ -50,6 +52,9 @@ export class UploadPhotoComponent implements OnInit {
               </div>`);
       const div = $(`#${index}`);
       div.html('');
+      div.click(function () {
+        console.log('hh');
+      })
       div.append(innerHtml);
     });
   }

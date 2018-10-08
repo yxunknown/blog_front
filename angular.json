@@ -36,7 +36,7 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
-              "node_modules/tooltip.js/dist/tooltips.min.js",
+              "node_modules/tooltip.js/dist/tooltip.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/hammerjs/hammer.min.js",
