@@ -6,11 +6,14 @@
           <mdb-card-body>
             <div class="container photo-wrapper">
               <div class="row">
-                <div class="col photo-item waves-light" mdbWavesEffect>
-                    <i class="fa fa-plus" style="font-size: 30px"></i>
+                <div id="1" class="col view overlay zoom photo-item waves-light"
+                     (click)="choseImage()" mdbWavesEffect>
+                  <i class="fa fa-plus" style="font-size: 30px"></i>
                 </div>
-                <div class="col photo-item"></div>
-                <div class="col photo-item"></div>
+                <div id="2" class="col view overlay zoom photo-item">
+
+                </div>
+                <div id="3" class="col photo-item"></div>
               </div>
               <div class="row">
                 <div class="col photo-item"></div>
@@ -23,7 +26,9 @@
                 <div class="col photo-item"></div>
               </div>
             </div>
-            <input type="file" hidden>
+            <input id="image-input"
+                   (change)="imagesChange()"
+                   accept="image/bmp, image/jpeg, image/png" type="file" multiple hidden>
           </mdb-card-body>
         </mdb-card>
       </div>
@@ -49,4 +54,11 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade tips" role="alert">
+  <strong>提示!</strong>一次上传的图片数量不能超过<span class="badge badge-primary">9</span>张
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>

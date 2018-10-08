@@ -36,13 +36,14 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/tooltip.js/dist/tooltips.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/hammerjs/hammer.min.js",
               "node_modules/photoswipe/dist/photoswipe.min.js",
               "node_modules/photoswipe/dist/photoswipe-ui-default.min.js",
               "node_modules/stackedit-js/docs/lib/stackedit.min.js",
-              "node_modules/marked/marked.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/marked/marked.min.js"
             ]
           },
           "configurations": {
