@@ -6,24 +6,23 @@
           <mdb-card-body>
             <div class="container photo-wrapper">
               <div class="row">
-                <div id="1" class="col view overlay zoom photo-item waves-light"
-                     (click)="choseImage()" mdbWavesEffect>
-                  <i class="fa fa-plus" style="font-size: 30px"></i>
+                <div id="1" class="col view overlay zoom photo-item">
+                  <div class="add-photo-btn waves-ripple" mdbWavesEffect>
+                    <i class="fa fa-plus" style="font-size: 30px"></i>
+                  </div>
                 </div>
-                <div id="2" class="col view overlay zoom photo-item">
-
-                </div>
+                <div id="2" class="col view overlay zoom photo-item"></div>
                 <div id="3" class="col view overlay zoom photo-item"></div>
               </div>
               <div class="row">
-                <div class="col photo-item"></div>
-                <div class="col photo-item"></div>
-                <div class="col photo-item"></div>
+                <div id="4" class="col view overlay zoom photo-item"></div>
+                <div id="5" class="col view overlay zoom photo-item"></div>
+                <div id="6" class="col view overlay zoom photo-item"></div>
               </div>
               <div class="row">
-                <div class="col photo-item"></div>
-                <div class="col photo-item"></div>
-                <div class="col photo-item"></div>
+                <div id="7" class="col view overlay zoom photo-item"></div>
+                <div id="8" class="col view overlay zoom photo-item"></div>
+                <div id="9" class="col view overlay zoom photo-item"></div>
               </div>
             </div>
             <input id="image-input"
@@ -35,22 +34,24 @@
 
       <div class="col-3">
         <div class="dropdown" mdbDropdown>
-
           <!--Trigger-->
           <button mdbDropdownToggle mdbBtn color="primary" block="true"
                   class="dropdown-toggle waves-light" type="button" mdbWavesEffect>
-            Dropdown primary
+            选择相册
           </button>
-
           <!--Menu-->
           <div class="dropdown-menu dropdown-primary album-list">
-            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">好吧</a>
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
         <!--/Dropdown primary-->
+
+        <button mdbBtn type="button" color="primary"
+                style="margin-top: 20px" block="true"
+                class="waves-light" mdbWavesEffect>上传</button>
       </div>
     </div>
   </div>
