@@ -17,6 +17,7 @@ import { AlbumComponent } from './album/album.component';
 import { AlbumDetailComponent } from './album-detail/album-detail.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
 import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],

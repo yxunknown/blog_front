@@ -14,18 +14,19 @@
         <!-- Email -->
         <div class="md-form form-sm">
           <i class="fa fa-envelope-square prefix"></i>
-          <input type="email" id="materialLoginFormEmail"
-                 data-error="账户必须为合法的邮箱地址"
-                 data-success="输入正确"
+          <input type="email" id="username"
+                 ([ngModel])="username"
                  class="form-control" mdbInputDirective>
-          <label for="materialLoginFormEmail">邮箱</label>
+          <label for="username">邮箱</label>
         </div>
 
         <!-- Password -->
         <div class="md-form form-sm">
           <i class="fa fa-lock prefix"></i>
-          <input type="password" id="materialLoginFormPassword" class="form-control" mdbInputDirective>
-          <label for="materialLoginFormPassword">密码</label>
+          <input type="password" id="password"
+                 ([ngModel])="password"
+                 class="form-control" mdbInputDirective>
+          <label for="password">密码</label>
         </div>
 
 
@@ -45,6 +46,11 @@
         </div>
       </form>
     </mdb-card-body>
-
   </mdb-card>
+  <div id="alerter" class="alert alert-danger alert-dismissible fade" role="alert">
+    <strong>提示!</strong>用户名或密码不能为空
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 </div>
