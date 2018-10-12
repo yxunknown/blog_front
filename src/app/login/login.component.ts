@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {a} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   username: String;
   password: String;
+
   constructor(
     private route: Router,
     private http: HttpClient) {
@@ -25,24 +27,32 @@ export class LoginComponent implements OnInit {
     // todo: request to login
     if (this.username === '' || this.password === '') {
       const alert = document.getElementById('alerter');
-      alert.classList.add('show');
-    }
-    const body = {
-      account: this.username,
-      password: this.password
-    };
-    this.http.post('http://45.77.16.125:8085/login', body).subscribe(
-      {
-        next: function (data) {
-          console.log(data);
+      console.log(alert.classList);
+      alert.classList.add('show', 'show');
+      console.log(alert.classList);
+    } else {
+      const body = {
+        'account': this.username,
+        'password': this.password
+      };
+      const data = new FormData();
+      data.set('account', this.username.toString());
+      data.set('password', this.password.toString());
+      console.log(data);
+      this.http.post('http://132.232.36.151:8089/api/login-service/login/token', data).subscribe(
+        value => {
+          console.log(value);
         },
-        error: function (err) {
-          console.log(err);
+        error1 => {
+          console.log(error1);
+        },
+        () => {
+          console.log('request completed');
         }
-      }
-    );
-    // after login
-    // this.route.navigate(['/home']);
+      );
+      // after login
+      // this.route.navigate(['/home']);
+    }
   }
 
 }

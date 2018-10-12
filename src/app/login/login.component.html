@@ -15,7 +15,8 @@
         <div class="md-form form-sm">
           <i class="fa fa-envelope-square prefix"></i>
           <input type="email" id="username"
-                 ([ngModel])="username"
+                 [(ngModel)]="username"
+                 [ngModelOptions]="{standalone: true}"
                  class="form-control" mdbInputDirective>
           <label for="username">邮箱</label>
         </div>
@@ -24,7 +25,8 @@
         <div class="md-form form-sm">
           <i class="fa fa-lock prefix"></i>
           <input type="password" id="password"
-                 ([ngModel])="password"
+                 [(ngModel)]="password"
+                 [ngModelOptions]="{standalone: true}"
                  class="form-control" mdbInputDirective>
           <label for="password">密码</label>
         </div>
