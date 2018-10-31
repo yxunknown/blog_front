@@ -19,6 +19,8 @@ import { WriteArticleComponent } from './write-article/write-article.component';
 import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from './services/api.service';
+import {TokenService} from './services/token.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 const appRoutes: Routes = [
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     AlbumComponent,
     AlbumDetailComponent,
     WriteArticleComponent,
-    UploadPhotoComponent
+    UploadPhotoComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,7 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ApiService],
+  providers: [ApiService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

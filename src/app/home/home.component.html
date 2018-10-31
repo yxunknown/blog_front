@@ -21,7 +21,7 @@
                 <i class="fa fa-image"></i><br>
                 <small>上传照片</small>
               </div>
-              <div class="col fun-item">
+              <div class="col fun-item" (click)="show()">
                 <i class="fa fa-credit-card"></i><br>
                 <small>小黑卡</small>
               </div>
@@ -69,3 +69,4 @@
     </div>
   </div>
 </div>
+<app-dialog [isShowClose]="true" title="提示" content="需要登录" negative="不登陆" positive="登录"></app-dialog>

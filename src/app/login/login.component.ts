@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../services/api.service';
+import {TokenService} from '../services/token.service';
+import {e} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: Router,
     private http: HttpClient,
-    private api: ApiService) {
+    private api: ApiService,
+    private token: TokenService) {
     this.username = '';
     this.password = '';
   }
@@ -25,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // todo: request to login
     if (this.username === '' || this.password === '') {
       const alert = document.getElementById('alerter');
       console.log(alert.classList);
@@ -37,17 +39,19 @@ export class LoginComponent implements OnInit {
       data.set('password', this.password.toString());
       this.http.post(this.api.tokoen(), data).subscribe(
         value => {
-          console.log(value);
+          status = value['info'];
+          if (status === '登录成功') {
+            this.token.setToken(value['map']['token']['token'], value['map']['token']['refreshToken']);
+            this.token.setUser(JSON.stringify(value['map']['user']));
+            this.route.navigate(['/home']);
+          } else {
+            alert(value['info']);
+          }
         },
         error1 => {
-          console.log(error1);
+          alert(error1)
         },
-        () => {
-          console.log('request completed');
-        }
       );
-      // after login
-      // this.route.navigate(['/home']);
     }
   }
 
