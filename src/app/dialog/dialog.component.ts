@@ -15,10 +15,9 @@ export class DialogComponent implements OnInit {
   @Input() positive: string;
   @Input() negative: string;
   @Input() isShowClose: boolean;
-
-  showModal: any;
+  isShowModal: boolean;
   constructor(private dialog: DialogService) {
-    this.showModal = false;
+    this.isShowModal = false;
   }
 
   ngOnInit() {
@@ -29,7 +28,7 @@ export class DialogComponent implements OnInit {
   }
 
   show(value) {
-    this.showModal = value === 'show';
+    this.isShowModal = value === 'show';
   }
 
   ok() {

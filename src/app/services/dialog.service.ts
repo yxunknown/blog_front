@@ -60,5 +60,4 @@ export class DialogService {
   emit(value) {
     this.subject.next(value);
   }
-
 }
