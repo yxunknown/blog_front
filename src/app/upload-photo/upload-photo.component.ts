@@ -1,6 +1,7 @@
-import {Component, OnInit, AfterViewInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import $ from 'jquery';
+import {CosService} from '../services/cos.service';
 
 @Component({
   selector: 'app-upload-photo',
@@ -14,7 +15,7 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
                     <i class="fa fa-plus" style="font-size: 30px"></i>
                  </div>`;
 
-  constructor() {
+  constructor(private cos: CosService) {
     this.imageCount = 0;
     this.uploadImageData = new FormData();
   }
@@ -84,6 +85,36 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
       div.html('');
       div.append(innerHtml);
     });
+  }
+
+  upload() {
+    // const cos = new COS({
+    //   SecretId: 'AKIDLUO5ZoNfHTTKzPeVEixAIMDxShgQ5Lac',
+    //   SecretKey: 'wc5IFwOcbKq68wUmobBYosiKi14rOeeO',
+    // });
+    // cos.getBucket({
+    //   Bucket: 'photo-1253210260',
+    //   Region: 'ap-chengdu',
+    // }, function (err, data) {
+    //   console.log(err || data);
+    // });
+    //
+    // cos.getObjectUrl({
+    //   Bucket: 'photo-1253210260',
+    //   Region: 'ap-chengdu',
+    //   Key: '[电影天堂www.dy2018.com]祈祷落幕时BD日语中字_20180909230720.JPG',
+    //   Sign: true
+    // }, function (err, data) {
+    //   console.log(err || data.Url);
+    // });
+    // cos.getBucketCors({
+    //   Bucket: 'photo-1253210260',
+    //   Region: 'ap-chengdu',
+    // }, function(err, data) {
+    //   console.log(err || data);
+    // });
+    const url = this.cos.getUrl('[电影天堂www.dy2018.com]祈祷落幕时BD日语中字_20180909230720.JPG');
+    console.log(url);
   }
 
 }

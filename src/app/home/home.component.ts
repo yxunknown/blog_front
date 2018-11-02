@@ -12,10 +12,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private token: TokenService,
     private dialog: DialogService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-
+    this.dialog.onPositiveClick(() => {
+      console.log('????????');
+      this.dialog.show('close');
+    });
   }
 
   ngAfterViewInit() {

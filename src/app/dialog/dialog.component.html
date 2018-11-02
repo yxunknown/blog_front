@@ -1,10 +1,9 @@
-<div mdbModal #basicModal="mdbModal" class="modal fade"
-     *ngIf="showModal"
+<div mdbModal #dialog="mdbModal" class="modal fade"
      tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()"
+        <button type="button" class="close pull-right" aria-label="Close" (click)="dialog.hide()"
           *ngIf="isShowClose">
           <span aria-hidden="true">×</span>
         </button>
@@ -24,3 +23,7 @@
     </div>
   </div>
 </div>
+<button type="button" mdbBtn color="primary"
+        style="display: none" id="showModal"
+        class="relative waves-light" (click)="dialog.show()"
+        mdbWavesEffect>Launch demo modal</button>

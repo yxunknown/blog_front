@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {ApiService} from './services/api.service';
 import {TokenService} from './services/token.service';
 import { DialogComponent } from './dialog/dialog.component';
+import {CosService} from './services/cos.service';
 
 
 const appRoutes: Routes = [
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ApiService, TokenService],
+  providers: [ApiService, TokenService, CosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

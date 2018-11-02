@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DialogService} from '../services/dialog.service';
+import {ModalDirective} from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-dialog',
@@ -16,21 +17,25 @@ export class DialogComponent implements OnInit {
   @Input() negative: string;
   @Input() isShowClose: boolean;
   isShowModal: boolean;
+  @ViewChild('dialog') dialogCom: ModalDirective;
   constructor(private dialog: DialogService) {
-    this.isShowModal = false;
+    this.isShowModal = true;
   }
 
   ngOnInit() {
     if (this.title === undefined) {
       this.title = '提示';
     }
-    this.dialog.onShow(this.show);
+    this.dialog.onShow(value => {
+      if (value === 'show') {
+        this.dialogCom.show();
+      } else {
+        setTimeout(() => {
+          this.dialogCom.hide();
+        }, 300);
+      }
+    });
   }
-
-  show(value) {
-    this.isShowModal = value === 'show';
-  }
-
   ok() {
     this.dialog.emit('positive_click_event');
   }

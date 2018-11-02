@@ -43,7 +43,8 @@
               "node_modules/photoswipe/dist/photoswipe.min.js",
               "node_modules/photoswipe/dist/photoswipe-ui-default.min.js",
               "node_modules/stackedit-js/docs/lib/stackedit.min.js",
-              "node_modules/marked/marked.min.js"
+              "node_modules/marked/marked.min.js",
+              "src/lib/cos-js-sdk-v5.min.js"
             ]
           },
           "configurations": {
