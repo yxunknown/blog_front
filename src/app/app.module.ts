@@ -22,6 +22,8 @@ import {ApiService} from './services/api.service';
 import {TokenService} from './services/token.service';
 import { DialogComponent } from './dialog/dialog.component';
 import {CosService} from './services/cos.service';
+import { AlertComponent } from './alert/alert.component';
+import {AlertService} from './services/alert.service';
 
 
 const appRoutes: Routes = [
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     AlbumDetailComponent,
     WriteArticleComponent,
     UploadPhotoComponent,
-    DialogComponent
+    DialogComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ApiService, TokenService, CosService],
+  providers: [ApiService, TokenService, CosService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

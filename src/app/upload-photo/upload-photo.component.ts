@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import $ from 'jquery';
 import {CosService} from '../services/cos.service';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-upload-photo',
@@ -15,7 +16,8 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
                     <i class="fa fa-plus" style="font-size: 30px"></i>
                  </div>`;
 
-  constructor(private cos: CosService) {
+  constructor(private cos: CosService,
+              private alert: AlertService) {
     this.imageCount = 0;
     this.uploadImageData = new FormData();
   }
@@ -39,10 +41,6 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
     const lengthOfImages = (imageInput as any).files.length;
     if (this.imageCount + lengthOfImages > 9) {
       // show alert info
-      $('.alert')[0].classList.add('show');
-      $('.close').click(function () {
-        $('.alert')[0].classList.remove('show');
-      });
     } else {
       for (let index = 0; index < lengthOfImages; index++) {
         this.uploadImageData.append('photos', (imageInput as any).files[index]);
@@ -88,33 +86,29 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
   }
 
   upload() {
-    // const cos = new COS({
-    //   SecretId: 'AKIDLUO5ZoNfHTTKzPeVEixAIMDxShgQ5Lac',
-    //   SecretKey: 'wc5IFwOcbKq68wUmobBYosiKi14rOeeO',
-    // });
-    // cos.getBucket({
-    //   Bucket: 'photo-1253210260',
-    //   Region: 'ap-chengdu',
-    // }, function (err, data) {
-    //   console.log(err || data);
-    // });
-    //
-    // cos.getObjectUrl({
-    //   Bucket: 'photo-1253210260',
-    //   Region: 'ap-chengdu',
-    //   Key: '[电影天堂www.dy2018.com]祈祷落幕时BD日语中字_20180909230720.JPG',
-    //   Sign: true
-    // }, function (err, data) {
-    //   console.log(err || data.Url);
-    // });
-    // cos.getBucketCors({
-    //   Bucket: 'photo-1253210260',
-    //   Region: 'ap-chengdu',
-    // }, function(err, data) {
-    //   console.log(err || data);
-    // });
-    const url = this.cos.getUrl('[电影天堂www.dy2018.com]祈祷落幕时BD日语中字_20180909230720.JPG');
-    console.log(url);
+    const files = this.uploadImageData.getAll('photos');
+    if (files.length === 0) {
+      this.alert.show({
+        type: 'danger',
+        title: '提示',
+        content: '没有选择照片'
+      });
+    } else {
+      const file = files[0];
+      this.cos.putObject({
+        Body: file,
+        Name: file['name'],
+      }, progress => {
+        console.log(progress);
+      }, (err, data) => {
+        console.log(err || data.Location);
+      });
+    }
+    this.alert.show({
+      type: 'success',
+      title: '提示',
+      content: `上传${files.length}张照片成功`
+    });
   }
 
 }
