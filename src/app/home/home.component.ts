@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TokenService} from '../services/token.service';
 import {DialogService} from '../services/dialog.service';
 
+import $ from 'jquery';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
