@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     } else {
       // load data
     }
+    console.log(this.token.getToken());
   }
 
   show() {

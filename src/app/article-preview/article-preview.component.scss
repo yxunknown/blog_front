@@ -22,3 +22,50 @@ mdb-card-img {
   margin-left: 10px;
   padding: 10px 10px 10px 10px;
 }
+.load-more {
+  margin-bottom: 10px;
+}
+
+.loading {
+  background-color: #eaeaea;
+  height: 16px;
+  list-style: none;
+  margin: 5px 0;
+}
+.loading-img-placeholder {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-color: #eaeaea;
+}
+
+.loading-animation {
+  animation: loading 1s ease-in-out infinite;
+  -webkit-animation: loading 1s ease-in-out infinite;
+}
+.animation-delay {
+  -webkit-animation: loading 1s cubic-bezier(0, 0, 0.78, 0.25) -.5s infinite;
+  animation: loading 1s cubic-bezier(0, 0, 0.31, 0.46) -.5s infinite;
+}
+@-webkit-keyframes loading {
+  0% {
+    width: 60%
+  }
+  50% {
+    width: 100%
+  }
+  to {
+    width: 60%
+  }
+}
+@keyframes loading {
+  0% {
+    width: 60%
+  }
+  50% {
+    width: 100%
+  }
+  to {
+    width: 60%
+  }
+}

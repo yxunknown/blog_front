@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       const data = new FormData();
       data.set('account', this.username.toString());
       data.set('password', this.password.toString());
-      this.http.post(this.api.tokoen(), data).subscribe(
+      this.http.post(this.api.token(), data).subscribe(
         value => {
           status = value['info'];
           if (status === '登录成功') {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error1 => {
-          alert(error1)
+          alert(error1);
         },
       );
     }
