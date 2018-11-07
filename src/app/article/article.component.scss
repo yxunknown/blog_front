@@ -1,0 +1,27 @@
+mdb-card {
+  margin-top: 15px;
+}
+.article-info {
+  list-style: none;
+  padding: 0;
+}
+.article-content {
+  width: 100%;
+}
+mdb-card-img {
+  float: left;
+  width: 130px;
+  height: 100px;
+  background-color: #175199;
+  margin-right: 10px;
+  object-fit: cover;
+}
+.btn-show-all {
+  color: #007bff!important;
+}
+.article-content-preview {
+  height: 100px;
+  overflow: hidden;
+  margin-left: 10px;
+  padding: 10px 10px 10px 10px;
+}

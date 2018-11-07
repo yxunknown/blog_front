@@ -1,0 +1,24 @@
+<mdb-card>
+  <mdb-card-body>
+    <ul class="article-info">
+      <li>
+        <small><i class="fa fa-tags"></i> {{article.tag}}</small>
+      </li>
+      <li>
+        <small><i class="fa fa-address-book"></i> {{article.author.nickname}} 著><a>{{article.author.account}}</a></small>
+      </li>
+    </ul>
+    <mdb-card-title><h4>{{article.title}}</h4></mdb-card-title>
+    <div class="article-content">
+      <mdb-card-img *ngIf="article.cover.path !== ''"
+                    src="{{article.cover.path}}"
+                    alt="Card image cap"></mdb-card-img>
+      <div #articleContainer class="article-content-preview">
+
+      </div>
+      <button mdbBtn type="button" (click)="showAllContent()"
+              class="btn-show-all" #btnShowAll
+              color="link" block="true" mdbWavesEffect>展开全文</button>
+    </div>
+  </mdb-card-body>
+</mdb-card>

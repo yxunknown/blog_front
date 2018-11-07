@@ -24,6 +24,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import {CosService} from './services/cos.service';
 import { AlertComponent } from './alert/alert.component';
 import {AlertService} from './services/alert.service';
+import { ArticleComponent } from './article/article.component';
 
 
 const appRoutes: Routes = [
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     WriteArticleComponent,
     UploadPhotoComponent,
     DialogComponent,
-    AlertComponent
+    AlertComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

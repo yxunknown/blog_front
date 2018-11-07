@@ -1,29 +1,6 @@
-mdb-card {
-  margin-top: 15px;
-}
-.article-info {
-  list-style: none;
-  padding: 0;
-}
-.article-content {
-  width: 100%;
-}
-mdb-card-img {
-  float: left;
-  width: 130px;
-  height: 100px;
-  background-color: #175199;
-  margin-right: 10px;
-  object-fit: cover;
-}
-.article-content-preview {
-  height: 100px;
-  overflow: hidden;
-  margin-left: 10px;
-  padding: 10px 10px 10px 10px;
-}
 .load-more {
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .loading {
@@ -38,7 +15,6 @@ mdb-card-img {
   height: 100px;
   background-color: #eaeaea;
 }
-
 .loading-animation {
   animation: loading 1s ease-in-out infinite;
   -webkit-animation: loading 1s ease-in-out infinite;

@@ -1,6 +1,7 @@
 <div id="article-container">
-
-
+  <div *ngIf="isShowContent">
+    <app-article *ngFor="let article of articles" [article]="article"></app-article>
+  </div>
   <mdb-card *ngIf="isShowLoading">
     <mdb-card-body>
       <li class="loading" style="width: 10%"></li>
@@ -18,29 +19,6 @@
       </div>
     </mdb-card-body>
   </mdb-card>
-  <div *ngIf="isShowContent">
-    <mdb-card *ngFor="let article of articles">
-      <mdb-card-body>
-        <ul class="article-info">
-          <li>
-            <small><i class="fa fa-tags"></i> {{article.tag}}</small>
-          </li>
-          <li>
-            <small><i class="fa fa-address-book"></i> {{article.author.nickname}} 著><a>{{article.author.account}}</a></small>
-          </li>
-        </ul>
-        <mdb-card-title><h4>{{article.title}}</h4></mdb-card-title>
-        <div class="article-content">
-          <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg"
-                        alt="Card image cap"></mdb-card-img>
-          <div class="article-content-preview">
-            <p>{{article.content}}
-            </p>
-          </div>
-        </div>
-      </mdb-card-body>
-    </mdb-card>
-  </div>
   <mdb-card class="load-more" *ngIf="isShowLoadMore">
     <button mdbBtn type="button" size="sm" [outline]="true"
             (click)="loadMore()"
