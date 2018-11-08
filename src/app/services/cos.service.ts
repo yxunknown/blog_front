@@ -55,7 +55,7 @@ export class CosService {
     });
   }
 
-  generateFileName(name: string): string {
+  private generateFileName(name: string): string {
     const postfix = name.substr(name.lastIndexOf('.'), name.length);
     const timestamp = (new Date()).getTime();
     return timestamp + postfix;

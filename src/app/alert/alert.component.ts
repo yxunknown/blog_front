@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertService} from '../services/alert.service';
-import $ from 'jquery';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',

@@ -24,6 +24,51 @@
       </div>
       <div class="col-2">
         <mdb-card>
+          <div class="view overlay zoom">
+            <div *ngIf="isUploading" class="progress cover-loading">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                   aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
+                图片上传中，请稍后...
+              </div>
+            </div>
+            <input #cover type="file" id="coverInput" style="display: none" (change)="coverChange()">
+            <img id="coverPreviewer" src="../../assets/imgs/album_cover_default.png" class="img-fluid round-img"/>
+            <div class="mask white-text cover-info rgba-black-strong waves-light"
+                 (click)="cover.click()"
+                 mdbWavesEffect>
+              <p>上传封面</p>
+            </div>
+          </div>
+          <div class="btn-group" mdbDropdown>
+            <button mdbDropdownToggle type="button" mdbBtn color="primary"
+                    block="true" id="selectCatalogBtn" size="sm"
+                    class="dropdown-toggle waves-light" mdbWavesEffect>
+              选择分类
+            </button>
+            <div class="dropdown-menu dropdown-primary">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+          <div class="input-group tag-container">
+            <div class="tag-wrapper">
+              <span *ngFor="let tag of tags; let i = index"
+                    class="badge badge-primary badge-pill tags">{{tag}}
+                <i class="delete-tag fa fa-times" (click)="deleteTag(i)"></i></span>
+            </div>
+            <div class="input-group-prepend">
+              <span class="input-group-text">标签</span>
+            </div>
+            <input type="text" class="form-control" aria-describedby="tagHelp"
+                   (keyup)="enterTag($event)" id="tagInput"
+                   aria-label="Amount (to the nearest dollar)">
+            <small id="tagHelp" class="form-text text-muted">输入标签后按回车添加</small>
+          </div>
+        </mdb-card>
+        <mdb-card style="margin-top: 20px">
           <mdb-card-body>
             <label>操作</label>
             <div class="flex-column">
@@ -73,19 +118,23 @@
                 class="waves-light fun-btn" mdbWavesEffect>
           发布文章
         </button>
-
-        <mdb-card style="margin-top: 20px;">
-          <mdb-card-body>
-          </mdb-card-body>
-        </mdb-card>
+        <button mdbBtn type="button" color="danger"
+                block="true" style="margin-top: 10px;"
+                (click)="data()"
+                class="waves-light fun-btn" mdbWavesEffect>
+          返回主页
+        </button>
       </div>
     </div>
   </div>
 </div>
 <!--add image modal-->
-<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Launch demo modal</button>
+<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>
+  Launch demo modal
+</button>
 
-<div mdbModal #insertImg="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+<div mdbModal #insertImg="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header text-center bg-primary white-text">
@@ -153,7 +202,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="insertImg.hide()" mdbWavesEffect>取消</button>
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="insertImg.hide()"
+                mdbWavesEffect>取消
+        </button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>插入</button>
       </div>
     </div>

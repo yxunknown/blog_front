@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 
-import $ from 'jquery';
+import * as $ from 'jquery';
 import {CosService} from '../services/cos.service';
 import {AlertService} from '../services/alert.service';
 

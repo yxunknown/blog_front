@@ -2,7 +2,8 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 
 import Stackedit from 'stackedit-js';
 import marked from 'marked';
-import {ancestorWhere} from 'tslint/lib/language/utils';
+import {CosService} from '../services/cos.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-write-article',
@@ -15,12 +16,15 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
 
   input: string;
 
-  constructor() {
+  isUploading = false;
+  tags = [];
+  constructor(
+    private cos: CosService
+  ) {
     this.stackedit = new Stackedit();
   }
 
   ngOnInit() {
-
   }
 
   ngAfterViewInit() {
@@ -37,7 +41,8 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     const writeWrapper = document.getElementById('write-wrapper');
     writeWrapper.style.height = height - 80 + 'px';
     const mdPreviewer = document.getElementById('md-previewer');
-    mdPreviewer.style.height = height - 80 +　'px';
+    mdPreviewer.style.height = height - 80 + 'px';
+    // register select2
   }
 
   markdown() {
@@ -90,6 +95,7 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
       img.setAttribute('src', reader.result);
     });
   }
+
   toLocalImgChose() {
     const localImgTab = document.getElementById('local-tab');
     const netImgTab = document.getElementById('net-tab');
@@ -105,6 +111,7 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     }
     return false;
   }
+
   toNetImgChose() {
     const localImgTab = document.getElementById('local-tab');
     const netImgTab = document.getElementById('net-tab');
@@ -120,10 +127,44 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     }
     return false;
   }
+
   setNetImgPreview() {
     const urlInput = document.getElementById('img-url');
     const netImgPreviewer = document.getElementById('net-img-previewer');
     netImgPreviewer.setAttribute('src', (urlInput as any).value);
+  }
+
+  coverChange() {
+    if (this.isUploading) {
+      return;
+    }
+    const file = ($('#coverInput').get(0) as any).files[0] as File;
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.addEventListener('load', () => {
+      $('#coverPreviewer').attr('src', fileReader.result);
+    });
+    this.isUploading = true;
+    this.cos.putObject({
+      Name: file.name,
+      Body: file,
+    }, process => {
+      console.log(process);
+    }, (err, data) => {
+      this.isUploading = false;
+      console.log(err || data.Location);
+    });
+  }
+
+  enterTag(event) {
+    const input = $('#tagInput');
+    if (event.code === 'Enter') {
+      this.tags.push(input.val());
+      input.val('');
+    }
+  }
+  deleteTag(index) {
+    this.tags.splice(index, 1);
   }
 
 }
