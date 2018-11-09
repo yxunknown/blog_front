@@ -16,7 +16,7 @@
                           (input)="syncMarkdown()"
                           mdbInputDirective></textarea>
               </div>
-              <div id="md-previewer" class="preview-area none animated zoomInRight">
+              <div id="md-previewer" class="markdown preview-area none animated zoomInRight">
               </div>
             </div>
           </mdb-card-body>
@@ -38,22 +38,31 @@
                  mdbWavesEffect>
               <p>上传封面</p>
             </div>
+            <small id="coverUploadTip" class="text-danger"></small>
           </div>
-          <div class="btn-group" mdbDropdown>
+          <div class="btn-group" mdbDropdown [autoClose]="false">
             <button mdbDropdownToggle type="button" mdbBtn color="primary"
                     block="true" id="selectCatalogBtn" size="sm"
                     class="dropdown-toggle waves-light" mdbWavesEffect>
               选择分类
             </button>
-            <div class="dropdown-menu dropdown-primary">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
+            <div class="dropdown-menu dropdown-primary catalog-dropdown">
+              <a *ngFor="let catalog of catalogs; let i = index" (click)="setCatalog(i)"
+                 class="dropdown-item">{{catalog.catalog}}</a>
+
+              <div class="form-group catalog-input">
+                <input type="text" class="form-control form-control-sm" id="catalogInput"
+                       aria-describedby="catalogHelp" placeholder="输入分类">
+                <small id="catalogHelp" class="form-text text-danger text-muted"></small>
+              </div>
+
+              <a class="dropdown-item bg-primary white-text text-center"
+                 (click)="addCatalog()">
+                <small><i class="fa fa-plus"></i> 添加分类</small>
+              </a>
             </div>
           </div>
-          <div class="input-group tag-container">
+          <div class="input-group input-group-sm mb-3 tag-container">
             <div class="tag-wrapper">
               <span *ngFor="let tag of tags; let i = index"
                     class="badge badge-primary badge-pill tags">{{tag}}
@@ -128,10 +137,6 @@
     </div>
   </div>
 </div>
-<!--add image modal-->
-<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>
-  Launch demo modal
-</button>
 
 <div mdbModal #insertImg="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
      aria-hidden="true">
@@ -146,8 +151,9 @@
       <div class="modal-body">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="local-tab" data-toggle="pill" href="javascript:void(0)"
+            <a class="nav-link" id="local-tab" data-toggle="pill" href="javascript:void(0)"
                (click)="toLocalImgChose()"
+               ngClass="{{isLocalImgTab ? 'active' : ''}}"
                role="tab" aria-controls="pills-home" aria-selected="true">
               从本地上传
             </a>
@@ -155,13 +161,16 @@
           <li class="nav-item">
             <a class="nav-link" id="net-tab" data-toggle="pill" href="javascript:void(0)"
                (click)="toNetImgChose()"
+               ngClass="{{!isLocalImgTab ? 'active' : ''}}"
                role="tab" aria-controls="pills-profile" aria-selected="false">
               添加网络图片
             </a>
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-local" role="tabpanel" aria-labelledby="pills-home-tab">
+          <div class="tab-pane fade" id="pills-local"
+               ngClass="{{isLocalImgTab ? 'show active' : ''}}"
+               role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="input-group mb-3">
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="fileInput"
@@ -172,7 +181,7 @@
             </div>
             <div class="flex-center">
               <img id="img-previewer" style="height: 200px;">
-              <div class="upload-cover">
+              <div class="upload-cover" *ngIf="isImageUploading">
                 <div class="progress upload-progress">
                   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
@@ -181,9 +190,12 @@
                 </div>
               </div>
             </div>
+            <small class="text-danger text-center" id="uploadImageTip"></small>
           </div>
 
-          <div class="tab-pane fade" id="pills-net" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <div class="tab-pane fade" id="pills-net"
+               ngClass="{{!isLocalImgTab ? 'show active' : ''}}"
+               role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="input-group mb-3">
               请输入图片的<b>URL</b>地址
             </div>
@@ -205,7 +217,9 @@
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="insertImg.hide()"
                 mdbWavesEffect>取消
         </button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>插入</button>
+        <button type="button" mdbBtn color="primary"
+                (click)="addImageToContent()"
+                class="relative waves-light" mdbWavesEffect>插入</button>
       </div>
     </div>
   </div>

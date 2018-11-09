@@ -32,6 +32,7 @@
               "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
               "node_modules/photoswipe/dist/photoswipe.css",
               "node_modules/photoswipe/dist/default-skin/default-skin.css",
+              "src/lib/markdown.stylish.css",
               "src/styles.scss"
             ],
             "scripts": [

@@ -22,7 +22,7 @@
   float: left;
   position: relative;
   overflow-y: scroll;
-  background-color: #fcfaf2;
+  overflow-x: hidden;
   //display: none;
 }
 .title-input {
@@ -100,4 +100,13 @@ label {
 .delete-tag {
   margin-left: 10px;
   color: white;
+}
+.catalog-dropdown {
+  width: 80%!important;
+  left: 10%;
+  color: #8590a6;
+}
+.catalog-input {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
