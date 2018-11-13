@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertService} from '../services/alert.service';
 import * as $ from 'jquery';
+import {timeInterval} from 'rxjs/operators';
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
@@ -20,11 +21,9 @@ export class AlertComponent implements OnInit {
       this.title = title;
       this.content = content;
       $('#alert').addClass('show');
+      setTimeout(() => {
+        $('#alert').removeClass('show');
+      }, 1500);
     });
   }
-
-  close() {
-    $('#alert').removeClass('show');
-  }
-
 }

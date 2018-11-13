@@ -5,15 +5,14 @@
         <small><i class="fa fa-tags"></i> {{article.tag}}</small>
       </li>
       <li>
-        <small><i class="fa fa-address-book"></i> {{article.author.nickname}} 著><a>{{article.author.account}}</a></small>
+        <small><i class="fa fa-address-book"></i> {{article.author.nickname}} 著 @ <a>{{article.author.account}}</a></small>
       </li>
     </ul>
     <mdb-card-title><h4>{{article.title}}</h4></mdb-card-title>
     <div class="article-content">
-      <mdb-card-img *ngIf="article.cover.path !== ''"
-                    src="{{article.cover.path}}"
-                    alt="Card image cap"></mdb-card-img>
-      <div #articleContainer class="article-content-preview">
+      <mdb-card-img *ngIf="isShowCover"
+                    src="{{article.cover.path}}"></mdb-card-img>
+      <div #articleContainer class="article-content-preview markdown">
 
       </div>
       <button mdbBtn type="button" (click)="showAllContent()"

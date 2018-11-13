@@ -3,6 +3,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import {CosService} from '../services/cos.service';
 import {AlertService} from '../services/alert.service';
+import {HttpService} from '../services/http.service';
 
 @Component({
   selector: 'app-upload-photo',
@@ -16,8 +17,12 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
                     <i class="fa fa-plus" style="font-size: 30px"></i>
                  </div>`;
 
+  albums: any;
+  currentAlbum: any;
+
   constructor(private cos: CosService,
-              private alert: AlertService) {
+              private alert: AlertService,
+              private http: HttpService) {
     this.imageCount = 0;
     this.uploadImageData = new FormData();
   }
@@ -30,11 +35,30 @@ export class UploadPhotoComponent implements OnInit, AfterViewInit {
     $('.add-photo-btn').click(function () {
       that.choseImage();
     });
+    this.http.getAlbums({
+      start: 0,
+      limit: 10000
+    }, {
+      onPreExecute: () => {
+        $('#setAlbumBtn').text('相册信息加载中...');
+      },
+      onPostExecute: (data, err) => {
+        $('#setAlbumBtn').text('选择相册');
+        if (err === undefined && data.code === 200) {
+          this.albums = data.map.albums;
+        }
+      }
+    });
   }
 
   choseImage() {
     document.getElementById('image-input').click();
   }
+
+  setAlbum(album) {
+    $('#setAlbumBtn').text(`${album.title}`);
+  }
+
 
   imagesChange() {
     const imageInput = document.getElementById('image-input');

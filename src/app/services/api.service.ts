@@ -34,4 +34,28 @@ export class ApiService {
   uploadPhoto() {
     return `${BASE_URL}/${API_PREFIX}/photo-provider/photo`;
   }
+
+  getArticleCount() {
+    return `${BASE_URL}/${API_PREFIX}/article-provider/article/count`;
+  }
+
+  getArticleCountBySelection() {
+    return `${BASE_URL}/${API_PREFIX}/article-provider/article/counts`;
+  }
+
+  getAlbums() {
+    return `${BASE_URL}/${API_PREFIX}/album-provider/album`;
+  }
+
+  addAlbums() {
+    return `${BASE_URL}/${API_PREFIX}/album-provider/album`;
+  }
+
+  addPhotoToAlbum() {
+    return `${BASE_URL}/${API_PREFIX}/photo-provider/photo`;
+  }
+
+  getAlbumPhotos() {
+    return `${BASE_URL}/${API_PREFIX}/photo-provider/photo/album`;
+  }
 }

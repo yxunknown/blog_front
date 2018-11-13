@@ -36,15 +36,13 @@
         <div class="dropdown" mdbDropdown>
           <!--Trigger-->
           <button mdbDropdownToggle mdbBtn color="primary" block="true"
+                  id="setAlbumBtn"
                   class="dropdown-toggle waves-light" type="button" mdbWavesEffect>
             选择相册
           </button>
           <!--Menu-->
           <div class="dropdown-menu dropdown-primary album-list">
-            <a class="dropdown-item" href="#">好吧</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" *ngFor="let album of albums" (click)="setAlbum(album)">{{album.title}}</a>
           </div>
         </div>
         <!--/Dropdown primary-->

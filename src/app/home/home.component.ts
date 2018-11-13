@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TokenService} from '../services/token.service';
 import {DialogService} from '../services/dialog.service';
+import {HttpService} from '../services/http.service';
+import {Router} from '@angular/router';
 
-import * as $ from 'jquery';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,15 +11,20 @@ import * as $ from 'jquery';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+  articleCount: number;
+  musicCount: number;
+  movieCount: number;
+
   constructor(
     private token: TokenService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    private http: HttpService,
+    private route: Router
   ) {
   }
 
   ngOnInit() {
     this.dialog.onPositiveClick(() => {
-      console.log('????????');
       this.dialog.show('close');
     });
   }
@@ -30,10 +36,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
     } else {
       // load data
     }
-    console.log(this.token.getToken());
+    this.http.getArticleCount({
+      onPreExecute: () => {
+      },
+      onPostExecute: (data, err) => {
+        if (err === undefined && data.code === 200) {
+          this.articleCount = data.map.count;
+        } else {
+          this.articleCount = 0;
+        }
+      }
+    });
+    this.http.getArticleCountBySelect({'catalog.id': 9}, {
+      onPreExecute: () => {
+      },
+      onPostExecute: (data, err) => {
+        if (err === undefined && data.code === 200) {
+          this.musicCount = data.map.count;
+        } else {
+          this.movieCount = 0;
+        }
+      }
+    });
+    this.http.getArticleCountBySelect({'catalog.id': 8}, {
+      onPreExecute: () => {
+      },
+      onPostExecute: (data, err) => {
+        if (err === undefined && data.code === 200) {
+          this.movieCount = data.map.count;
+        } else {
+          this.movieCount = 0;
+        }
+      }
+    });
   }
 
   show() {
     this.dialog.show('show');
+  }
+
+  toWritor() {
+    this.route.navigate(['/article/write']);
   }
 }

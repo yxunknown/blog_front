@@ -5,6 +5,11 @@ import marked from 'marked';
 import {CosService} from '../services/cos.service';
 import * as $ from 'jquery';
 import {HttpService} from '../services/http.service';
+import hljs from 'highlight.js';
+import {AlertService} from '../services/alert.service';
+import {TokenService} from '../services/token.service';
+import {StorageService} from '../services/storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-write-article',
@@ -25,12 +30,17 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
   cover: any;
 
   isLocalImgTab = true;
-
   isImageUploading = false;
+
+  currentImageUrl = '';
 
   constructor(
     private cos: CosService,
-    private http: HttpService
+    private http: HttpService,
+    private alert: AlertService,
+    private token: TokenService,
+    private storage: StorageService,
+    private route: Router
   ) {
     this.stackedit = new Stackedit();
   }
@@ -53,7 +63,6 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     writeWrapper.style.height = height - 80 + 'px';
     const mdPreviewer = document.getElementById('md-previewer');
     mdPreviewer.style.height = height - 80 + 'px';
-
     // get article catalog
     this.getArticleCatalogs();
   }
@@ -138,10 +147,62 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     const previewer = document.getElementById('md-previewer');
     previewer.innerHTML = marked(value);
     previewer.scrollTo(0, previewer.scrollHeight);
+    // highlight code
+    $('pre code').each((i, block) => {
+      hljs.highlightBlock(block);
+    });
   }
 
-  data() {
-    alert(document.documentElement.clientHeight);
+  uploadArticle() {
+    const title = $('#articleTitle');
+    if (title.val() === '') {
+      this.alert.show({
+        type: 'danger',
+        title: '提示',
+        content: '请填写文章标题'
+      });
+      return;
+    }
+    if (this.textarea.value === '') {
+      this.alert.show({
+        type: 'danger',
+        title: '提示',
+        content: '请输入文章内容'
+      });
+      return;
+    }
+    let cover = '';
+    if (this.cover !== undefined) {
+      cover = this.cover.id;
+    }
+    let catalog = '';
+    if (this.currentCatalog !== undefined) {
+      catalog = this.currentCatalog.id;
+    }
+    const article = {
+      title: `${title.val()}`,
+      content: this.textarea.value,
+      author: this.token.getUser().account,
+      cover: cover,
+      catalog: catalog,
+      tag: this.tags.join('#,'),
+      datetime: ''
+    };
+    this.http.addArticle(article, {
+      onPreExecute: () => {
+      },
+      onPostExecute: (data, err) => {
+        if (err === undefined && data.code === 200) {
+          this.alert.show({
+            type: 'success',
+            title: '提示',
+            content: '发布文章成功'
+          });
+        } else {
+          console.log(err);
+        }
+      }
+    });
   }
 
   fileChanged() {
@@ -162,33 +223,11 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     }, progress => {
       console.log(progress);
     }, (err, result) => {
+      this.isImageUploading = false;
       if (err === undefined) {
-        this.isImageUploading = false;
         $('#uploadImageTip').text('图片上传失败');
       } else {
-        const photo = {
-          id: -1,
-          path: result.Location,
-          description: '文章图片内容',
-          latitude: 0,
-          longitude: 0,
-          md5: `${result.Etag}`,
-          uploadDate: '2018-11-09 12:23:32'
-        };
-        this.http.uploadPhoto(photo, {
-          onPreExecute: () => {},
-          onPostExecute: (res, error) => {
-            console.log(res || error);
-            this.isImageUploading = false;
-            if (error === undefined && res.code === 200) {
-              const editor = $('#editor');
-              const content = editor.val() + `![${file.name}](${result.Location})`;
-              editor.val(content);
-            } else {
-              $('#uploadImageTip').text('图片上传失败');
-            }
-          }
-        });
+        this.currentImageUrl = result.Location;
       }
     });
   }
@@ -207,6 +246,22 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     const urlInput = document.getElementById('img-url');
     const netImgPreviewer = document.getElementById('net-img-previewer');
     netImgPreviewer.setAttribute('src', (urlInput as any).value);
+    this.currentImageUrl = (urlInput as any).value;
+  }
+
+  addImageToContent() {
+    if (this.currentImageUrl === '') {
+      this.alert.show({
+        type: 'info',
+        title: '提示',
+        content: '插入图片地址不能为空，请上传本地图片或填入网络图片地址'
+      });
+    } else {
+      const editor = $('#editor');
+      editor.val(editor.val() + `\n![image](${this.currentImageUrl})`);
+      this.syncMarkdown();
+      $('#closeImageInsert').click();
+    }
   }
 
   coverChange() {
@@ -238,7 +293,8 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
           uploadDate: '2018-11-09 12:23:32'
         };
         this.http.uploadPhoto(photo, {
-          onPreExecute: () => {},
+          onPreExecute: () => {
+          },
           onPostExecute: (result, error) => {
             console.log(result || error);
             this.isUploading = false;
@@ -266,6 +322,53 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
 
   deleteTag(index) {
     this.tags.splice(index, 1);
+  }
+
+  saveToDraft() {
+    const title = $('#articleTitle');
+    if (title.val() === '') {
+      this.alert.show({
+        type: 'danger',
+        title: '提示',
+        content: '请填写文章标题'
+      });
+      return;
+    }
+    if (this.textarea.value === '') {
+      this.alert.show({
+        type: 'danger',
+        title: '提示',
+        content: '请输入文章内容'
+      });
+      return;
+    }
+    let cover = '';
+    if (this.cover !== undefined) {
+      cover = this.cover.id;
+    }
+    let catalog = '';
+    if (this.currentCatalog !== undefined) {
+      catalog = this.currentCatalog.id;
+    }
+    const article = {
+      title: `${title.val()}`,
+      content: this.textarea.value,
+      author: this.token.getUser().account,
+      cover: cover,
+      catalog: catalog,
+      tag: this.tags.join('#,'),
+      datetime: ''
+    };
+    this.storage.storageArticle(title, article);
+    this.alert.show({
+      type: 'success',
+      title: '提示',
+      content: '保存文章成功'
+    });
+  }
+
+  routeToHome() {
+    this.route.navigate(['/home']);
   }
 
 }

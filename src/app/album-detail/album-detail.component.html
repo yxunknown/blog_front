@@ -6,60 +6,10 @@
         <mdb-card>
           <mdb-card-body>
             <div class="images-container">
-              <div class="image-list-item flex-center">
-                <div class="photo-item view zoom waves-light" mdbWavesEffect (click)="preview()">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-              </div>
-              <div class="image-list-item flex-center">
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-              </div>
-              <div class="image-list-item flex-center">
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-              </div>
-              <div class="image-list-item flex-center">
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
-                </div>
-                <div class="photo-item view zoom">
-                  <img src="../../assets/imgs/pho.jpeg">
+              <div *ngFor="let row of photos; let ri = index" class="image-list-item flex-center">
+                <div *ngFor="let photo of row; let ci = index"
+                  class="photo-item view zoom waves-light" mdbWavesEffect (click)="preview(ri * 4 + ci)">
+                  <img src="{{photo.path}}">
                 </div>
               </div>
             </div>
@@ -71,10 +21,10 @@
                 <i class="fa fa-arrow-left"></i>
               </button>
               <button mdbBtn type="button" color="primary"
-                      mdbTooltip="当前第 4 页，共 23 页"
+                      mdbTooltip="当前第 {{currentPage}} 页，共 {{totalPage}} 页"
                       placement="top"
                       size="sm" class="waves-light float-left pagination-btn" mdbWavesEffect>
-                4 / 23
+                {{currentPage}} / {{totalPage}}
               </button>
               <button mdbBtn type="button" color="primary"
                       mdbTooltip="下一页"
@@ -88,15 +38,15 @@
       </div>
       <div class="col-3">
         <mdb-card class="album-info">
-          <mdb-card-img src="../../assets/imgs/main_bg.jpg"></mdb-card-img>
+          <mdb-card-img src="{{album.cover.path}}"></mdb-card-img>
           <mdb-card-body>
-            <mdb-card-title class="flex-center"><h3>Unsplash</h3></mdb-card-title>
-            <small class="flex-center">photo from unsplash.com</small>
+            <mdb-card-title class="flex-center"><h3>{{album.title}}</h3></mdb-card-title>
+            <small class="flex-center">{{album.description}}</small>
             <div class="info">
-              创建时间：<span class="badge blue">2018-09-29 11:25:44</span>
+              创建时间：<span class="badge blue">{{album.createDate}}</span>
             </div>
             <div class="info">
-              照片数量：<span class="badge blue">34</span>
+              照片数量：<span class="badge blue">{{photoCount}}</span>
             </div>
           </mdb-card-body>
         </mdb-card>
@@ -195,6 +145,7 @@
 </div>
 
 <div mdbModal #uploadPhotoModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <app-alert></app-alert>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header text-center white-text primary-color">
@@ -209,29 +160,31 @@
           <!-- Password -->
           <div class="md-form form-sm">
             <i class="fa fa-info prefix"></i>
-            <input type="text" id="materialLoginFormPassword" class="form-control" mdbInputDirective>
-            <label for="materialLoginFormPassword">描述</label>
+            <input type="text" id="imageDesc" class="form-control" mdbInputDirective>
+            <label for="imageDesc">描述</label>
           </div>
 
           <div class="md-form">
             <div class="upload-container flex-center view overlay">
               <img id="photo-previewer" src="../../assets/imgs/main_bg.jpg">
               <div class="mask white-text photo-info rgba-black-strong waves-light"
-                   (click)="choseFile()"
+                   (click)="inputFile.click()"
                    mdbWavesEffect>
                 <h3>选取相片</h3>
               </div>
             </div>
-            <input id="file-chose" type="file" style="display: none"
+            <input id="file-chose" type="file" style="display: none" #inputFile
                    accept="image/bmp, image/jpeg, image/png"
                    (change)="fileChange()">
           </div>
-
         </form>
+        <small class="text-danger" id="imageTip"></small>
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="uploadPhotoModal.hide()" mdbWavesEffect>取消</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>上传</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light"
+                (click)="uploadPhoto()"
+                mdbWavesEffect>上传</button>
       </div>
     </div>
   </div>

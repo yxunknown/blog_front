@@ -1,117 +1,24 @@
 <div class="content-container" xmlns="http://www.w3.org/1999/html">
   <app-nav></app-nav>
-  <div class="container album-container">
-    <div class="row list">
-      <div class="col">
+  <div class="container album-container" id="albumContainer">
+    <div class="row list" *ngIf="loading">
+      <div class="progress" style="width: 100%">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+          數據加載中...
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let row of albumSet" class="row list">
+      <div *ngFor="let album of row " class="col album">
         <mdb-card >
           <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
+            <img src="{{album.cover.path}}" class="img-fluid"/>
             <div class="mask white-text album-info rgba-black-strong waves-light"
-                 (click)="detail()"
+                 (click)="detail(album)"
                  mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-    </div>
-    <div class="row list">
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-    </div>
-    <div class="row list">
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
-            </div>
-          </div>
-        </mdb-card>
-      </div>
-      <div class="col">
-        <mdb-card>
-          <div class="view overlay zoom album-item">
-            <img src="../../assets/imgs/album_cover_default.png" class="img-fluid"/>
-            <div class="mask white-text album-info rgba-black-strong waves-light" mdbWavesEffect>
-              <h3>Unsplash</h3>
-              <small>photos from unsplash.com</small><br>
-              <small><span class="badge blue">23</span></small>
+              <h3 style="font-family: Serif, sans-serif">{{album.title}}</h3>
+              <small>{{album.description}}</small><br>
+              <small><span class="badge blue">{{album.createDate}}</span></small>
             </div>
           </div>
         </mdb-card>
@@ -127,10 +34,10 @@
         <i class="fa fa-arrow-left"></i>
       </button>
       <button mdbBtn type="button" color="primary"
-              mdbTooltip="当前第 4 页，共 23 页"
+              mdbTooltip="当前第 {{currentPage}} 页，共 {{getPages()}} 页"
               placement="top"
               size="sm" class="waves-light float-left pagination-btn" mdbWavesEffect>
-        4 / 23
+        {{currentPage}} / {{getPages()}}
       </button>
       <button mdbBtn type="button" color="primary"
               mdbTooltip="下一页"
@@ -150,8 +57,8 @@
     </button>
   </div>
 </div>
-
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <app-alert></app-alert>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header text-center white-text primary-color">
@@ -163,19 +70,17 @@
       <div class="modal-body">
         <form class="text-left" style="color: #757575;">
 
-          <!-- Email -->
           <div class="md-form form-sm">
             <i class="fa fa-photo prefix"></i>
-            <input type="text" id="materialLoginFormEmail"
+            <input type="text" id="titleOfAlbum"
                    class="form-control" mdbInputDirective>
-            <label for="materialLoginFormEmail">相册名称</label>
+            <label for="titleOfAlbum">相册名称</label>
           </div>
 
-          <!-- Password -->
           <div class="md-form form-sm">
             <i class="fa fa-info prefix"></i>
-            <input type="text" id="materialLoginFormPassword" class="form-control" mdbInputDirective>
-            <label for="materialLoginFormPassword">描述</label>
+            <input type="text" id="descOfAlbum" class="form-control" mdbInputDirective>
+            <label for="descOfAlbum">描述</label>
           </div>
 
           <div class="md-form">
@@ -192,12 +97,14 @@
                    accept="image/bmp, image/jpeg, image/png"
                    (change)="fileChange()">
           </div>
-
+          <small class="text-danger" id="tips"></small>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>取消</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>创建</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light"
+                (click)="addAlbum()"
+                mdbWavesEffect>创建</button>
       </div>
     </div>
   </div>

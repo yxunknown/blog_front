@@ -3,8 +3,6 @@ import {TokenService} from '../services/token.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../services/api.service';
 
-import marked from 'marked';
-
 @Component({
   selector: 'app-article-preview',
   templateUrl: './article-preview.component.html',
@@ -31,16 +29,10 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(marked('# hhello  \n dwadawd'));
   }
 
   loadMore() {
     // handle load more
-  }
-
-  parseMarkdownToHtml(target, markdown) {
-    console.log(target);
-    console.log(markdown);
   }
 
   getArticle(start, limit) {
@@ -73,14 +65,7 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
       },
       error: err => {
         console.log(err);
-      },
-      complete: () => {
-        console.log('complete');
       }
     });
-  }
-  showAllContent(target, article) {
-    console.log(target.path[1]);
-    console.log(article);
   }
 }

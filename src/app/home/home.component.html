@@ -13,7 +13,7 @@
         <mdb-card>
           <mdb-card-body>
             <div class="row">
-              <div class="col fun-item" href="/article/write">
+              <div class="col fun-item" (click)="toWritor()">
                 <i class="fa fa-edit"></i><br>
                 <small>添加文章</small>
               </div>
@@ -33,7 +33,7 @@
             <ul class="content-list">
               <li class="waves-ripple" mdbWavesEffect>
                 <div class="content-list-item">
-                  <i class="fa fa-archive"></i> 文章 <span class="info-badge">23</span>
+                  <i class="fa fa-archive"></i> 文章 <span class="info-badge">{{articleCount}}</span>
                 </div>
               </li>
               <li class="waves-ripple" mdbWavesEffect>
@@ -43,11 +43,11 @@
               </li>
               <li class="waves-ripple" mdbWavesEffect>
                 <div class="content-list-item">
-                  <i class="fa fa-music"></i> 歌单 <span class="info-badge">132</span>
+                  <i class="fa fa-music"></i> 歌单 <span class="info-badge">{{musicCount}}</span>
                 </div>
               <li class="waves-ripple" mdbWavesEffect>
                 <div class="content-list-item">
-                  <i class="fa fa-video-camera"></i> 电影 <span class="info-badge">132</span>
+                  <i class="fa fa-video-camera"></i> 电影 <span class="info-badge">{{movieCount}}</span>
                 </div>
               </li>
             </ul>
@@ -63,7 +63,7 @@
           <p>紫衣青衫打马归家，路遇伊人面似桃花。<br><br>
             本站只是个人博客网站，不对网站内容的权威性负责。同时，网站内一切内容未经允许，不得转载。
           </p>
-          <p>联系方式:  <i class="fa fa-envelope"></i> 991146900#qq.com </p>
+          <p>联系方式:  <i class="fa fa-envelope"></i> hercats#qq.com   将 # 替换为 @ 。</p>
         </div>
       </div>
     </div>

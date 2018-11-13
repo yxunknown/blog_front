@@ -26,6 +26,7 @@ import {AlertComponent} from './alert/alert.component';
 import {AlertService} from './services/alert.service';
 import {ArticleComponent} from './article/article.component';
 import {HttpService} from './services/http.service';
+import {StorageService} from './services/storage.service';
 
 
 const appRoutes: Routes = [
@@ -68,7 +69,14 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ApiService, TokenService, CosService, AlertService, HttpService],
+  providers: [
+    ApiService,
+    TokenService,
+    CosService,
+    AlertService,
+    HttpService,
+    StorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

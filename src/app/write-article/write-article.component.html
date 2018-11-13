@@ -6,7 +6,7 @@
           <mdb-card-body id="edit-area-wrapper">
             <!--Material textarea-->
             <mdb-card-title class="text-center">
-              <h3><input class="title-input" type="text" placeholder="输入标题"></h3>
+              <h3><input class="title-input" type="text" placeholder="输入标题" id="articleTitle"></h3>
             </mdb-card-title>
             <div>
               <div id="write-wrapper" class="edit-area whole">
@@ -95,9 +95,17 @@
                 <i class="fa fa-image"></i>
               </button>
               <button mdbBtn type="button" color="primary"
-                      size="sm" mdbTooltip="保存"
+                      size="sm" mdbTooltip="保存到草稿"
+                      (click)="saveToDraft()"
                       class="waves-light fun-btn" mdbWavesEffect>
                 <i class="fa fa-check"></i>
+              </button>
+
+              <button mdbBtn type="button" color="primary"
+                      size="sm" mdbTooltip="查看草稿箱"
+                      (click)="draftList.show()"
+                      class="waves-light fun-btn" mdbWavesEffect>
+                <i class="fa fa-file"></i>
               </button>
             </div>
             <label>编辑选项</label>
@@ -123,13 +131,13 @@
 
         <button mdbBtn type="button" color="primary"
                 block="true" style="margin-top: 20px;"
-                (click)="data()"
+                (click)="uploadArticle()"
                 class="waves-light fun-btn" mdbWavesEffect>
           发布文章
         </button>
         <button mdbBtn type="button" color="danger"
                 block="true" style="margin-top: 10px;"
-                (click)="data()"
+                (click)="routeToHome()"
                 class="waves-light fun-btn" mdbWavesEffect>
           返回主页
         </button>
@@ -215,11 +223,38 @@
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="insertImg.hide()"
+                id="closeImageInsert"
                 mdbWavesEffect>取消
         </button>
         <button type="button" mdbBtn color="primary"
                 (click)="addImageToContent()"
-                class="relative waves-light" mdbWavesEffect>插入</button>
+                class="relative waves-light" mdbWavesEffect>插入
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-alert></app-alert>
+
+
+<div mdbModal #draftList="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border: none">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="draftList.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100">草稿箱</h4>
+      </div>
+      <div class="modal-body" style="padding: 0">
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action waves-light" mdbWavesEffect>Dapibus ac facilisis in</a>
+          <a class="list-group-item list-group-item-action waves-light" mdbWavesEffect>Morbi leo risus</a>
+          <a class="list-group-item list-group-item-action waves-light" mdbWavesEffect>Porta ac consectetur ac</a>
+          <a class="list-group-item list-group-item-action disabled waves-light" mdbWavesEffect>Vestibulum at eros</a>
+        </div>
       </div>
     </div>
   </div>
