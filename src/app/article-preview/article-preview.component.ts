@@ -13,19 +13,20 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
   isShowLoading: boolean;
   isShowContent: boolean;
   articles: any;
+  start: number;
 
   constructor(
     private token: TokenService,
     private http: HttpClient,
     private api: ApiService) {
-
+    this.start = 0;
   }
 
   ngOnInit() {
     this.isShowLoading = true;
     this.isShowLoadMore = false;
     this.isShowContent = false;
-    this.getArticle(0, 20);
+    this.getArticle(this.start, 20);
   }
 
   ngAfterViewInit() {
@@ -33,6 +34,7 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
 
   loadMore() {
     // handle load more
+    this.getArticle(this.start, 20);
   }
 
   getArticle(start, limit) {
@@ -53,14 +55,16 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
           // dismiss loading component and show content area
           this.isShowLoading = false;
           this.isShowContent = true;
+          this.start += limit;
           if (this.articles === undefined) {
             this.articles = value['map']['articles'];
-            this.isShowLoadMore = this.articles.length > 0;
           } else {
             const newArticles = value['map']['articles'];
-            this.isShowLoadMore = newArticles.length > 0;
-            this.articles.push(newArticles);
+            for (let i = 0; i < newArticles.length; i++) {
+              this.articles.push(newArticles[i]);
+            }
           }
+          this.isShowLoadMore = (value as any).map.articles.length > 0;
         }
       },
       error: err => {

@@ -1,5 +1,5 @@
 <div class="content-container">
-  <app-nav></app-nav>
+  <app-nav [index]="0"></app-nav>
 </div>
 <div class="container main-content-container">
   <div class="row">
@@ -13,15 +13,15 @@
         <mdb-card>
           <mdb-card-body>
             <div class="row">
-              <div class="col fun-item" (click)="toWritor()">
+              <div class="col fun-item" *ngIf="isAdmin" (click)="toWritor()">
                 <i class="fa fa-edit"></i><br>
                 <small>添加文章</small>
               </div>
-              <div class="col fun-item">
+              <div class="col fun-item" *ngIf="isAdmin" (click)="toUpload()">
                 <i class="fa fa-image"></i><br>
                 <small>上传照片</small>
               </div>
-              <div class="col fun-item" (click)="show()">
+              <div class="col fun-item" (click)="toBlack()">
                 <i class="fa fa-credit-card"></i><br>
                 <small>小黑卡</small>
               </div>
@@ -64,6 +64,8 @@
             本站只是个人博客网站，不对网站内容的权威性负责。同时，网站内一切内容未经允许，不得转载。
           </p>
           <p>联系方式:  <i class="fa fa-envelope"></i> hercats#qq.com   将 # 替换为 @ 。</p>
+          <small>你好.HELLO.привет.NAMASTé.مرحبًا.SAULT.HOLA.HALLO.おはよう</small>
+          <small style="color: orangered">ruok.today?</small>
         </div>
       </div>
     </div>

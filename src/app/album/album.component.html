@@ -1,5 +1,5 @@
 <div class="content-container" xmlns="http://www.w3.org/1999/html">
-  <app-nav></app-nav>
+  <app-nav [index]="1"></app-nav>
   <div class="container album-container" id="albumContainer">
     <div class="row list" *ngIf="loading">
       <div class="progress" style="width: 100%">
@@ -51,6 +51,7 @@
     <button mdbBtn type="button" color="primary"
             mdbTooltip="创建相册"
             placement="top"
+            *ngIf="isAdmin"
             (click)="basicModal.show()"
             size="sm" class="waves-light float-right" mdbWavesEffect>
       <i class="fa fa-plus"></i>

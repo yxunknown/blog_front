@@ -2,3 +2,8 @@ strong {
   font-weight: bold;
   font-size: large;
 }
+.alerter {
+  z-index: 1000000;
+  position: absolute;
+  width: 100%;
+}

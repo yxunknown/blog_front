@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import {CosService} from '../services/cos.service';
 import {AlertService} from '../services/alert.service';
 import {StorageService} from '../services/storage.service';
+import {TokenService} from '../services/token.service';
 
 @Component({
   selector: 'app-album',
@@ -20,17 +21,20 @@ export class AlbumComponent implements OnInit {
   isCoverUploading: boolean;
   coverId: any;
   loading = true;
+  isAdmin: boolean;
 
   constructor(private route: Router,
               private http: HttpService,
               private cos: CosService,
               private alert: AlertService,
-              private storage: StorageService) {
+              private storage: StorageService,
+              private token: TokenService) {
     this.start = 0;
     this.currentPage = 1;
     this.albumCount = 0;
     this.isCoverUploading = false;
     this.coverId = '';
+    this.isAdmin = this.token.isAdmin();
   }
 
   ngOnInit() {

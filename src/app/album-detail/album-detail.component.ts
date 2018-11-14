@@ -7,6 +7,7 @@ import {HttpService} from '../services/http.service';
 import {AlertService} from '../services/alert.service';
 import * as $ from 'jquery';
 import {CosService} from '../services/cos.service';
+import {TokenService} from '../services/token.service';
 
 @Component({
   selector: 'app-album-detail',
@@ -23,14 +24,19 @@ export class AlbumDetailComponent implements OnInit {
   photoCount: number;
   currentPage = 1;
   totalPage = 1;
+  isAdmin: boolean;
+  isLoading: boolean;
   constructor(private storage: StorageService,
               private routeInfo: ActivatedRoute,
               private http: HttpService,
               private alert: AlertService,
+              private token: TokenService,
               private cos: CosService) {
     this.album = this.storage.getAlbum(routeInfo.params['value'].id);
     this.start = 0;
     this.photoCount = 0;
+    this.isLoading = true;
+    this.isAdmin = this.token.isAdmin();
   }
 
   ngOnInit() {
@@ -38,8 +44,9 @@ export class AlbumDetailComponent implements OnInit {
       start: this.start,
       limit: 16
     }, {
-      onPreExecute: () => {},
+      onPreExecute: () => { this.isLoading = true},
       onPostExecute: ((data, err) => {
+        this.isLoading = false;
         if (err === undefined && data.code === 200) {
           this.photoCount = data.map.count;
           this.totalPage = Math.ceil(this.photoCount / 16);

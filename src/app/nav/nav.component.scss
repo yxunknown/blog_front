@@ -12,8 +12,10 @@
   color: #0d47a1
 }
 .actived {
-  color: #175199!important;
   border-bottom: #8590a6 solid 2px;
+}
+.actived a {
+  color: #4285F4!important;
 }
 .dropdown-container {
   right: 40px;

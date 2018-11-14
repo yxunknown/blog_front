@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
   password: FormControl;
   rePassword: FormControl;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private location: Location) {
     this.account = new FormControl('',[
       Validators.email,
       Validators.minLength(1),
@@ -36,11 +38,11 @@ export class RegisterComponent implements OnInit {
 
   register() {
     // todo: request server
-    this.router.navigate(['login']);
   }
 
   back() {
     // back to pre page
+    this.location.back();
   }
 
 }

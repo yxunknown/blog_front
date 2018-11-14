@@ -24,7 +24,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
   }
   showAllContent() {
     if (!this.isShowingAllContent) {
-      this.container.nativeElement.style.height = '100%';
+      this.container.nativeElement.style.height = 'auto';
       this.btnShowAll.nativeElement.innerText = '收起全文';
       this.isShowingAllContent = true;
       // handle cover

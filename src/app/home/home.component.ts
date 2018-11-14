@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   articleCount: number;
   musicCount: number;
   movieCount: number;
+  isAdmin: boolean;
 
   constructor(
     private token: TokenService,
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private http: HttpService,
     private route: Router
   ) {
+    this.isAdmin = this.token.isAdmin();
   }
 
   ngOnInit() {
@@ -30,12 +32,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (!this.token.verifyToken()) {
-      // show dialog
-      // this.dialog.show('show');
-    } else {
-      // load data
-    }
     this.http.getArticleCount({
       onPreExecute: () => {
       },
@@ -71,11 +67,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  show() {
-    this.dialog.show('show');
+  toBlack() {
+    this.route.navigate(['/card/black']);
   }
 
   toWritor() {
     this.route.navigate(['/article/write']);
+  }
+
+  toUpload() {
+    this.route.navigate(['/photo/upload']);
   }
 }

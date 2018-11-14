@@ -27,6 +27,7 @@ import {AlertService} from './services/alert.service';
 import {ArticleComponent} from './article/article.component';
 import {HttpService} from './services/http.service';
 import {StorageService} from './services/storage.service';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 const appRoutes: Routes = [
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     CosService,
     AlertService,
     HttpService,
-    StorageService
+    StorageService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

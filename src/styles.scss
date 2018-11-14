@@ -9,7 +9,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url("./assets/imgs/main_bg.jpg");
+  background-image: url("https://photo-1253210260.cos.ap-chengdu.myqcloud.com/main_bg.jpg");
 }
 .content-container {
   width: 100%;
@@ -62,4 +62,8 @@ body {
   padding-top: 35px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.not-see {
+  display: none;
 }

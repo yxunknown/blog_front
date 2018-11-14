@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {TokenService} from '../services/token.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+  isGuest: boolean;
+  @Input() index: number;
+  constructor(
+    private token: TokenService
+  ) { }
 
   ngOnInit() {
+    this.user = this.token.getUser();
+    this.isGuest = this.token.isGuest();
   }
 
 }
