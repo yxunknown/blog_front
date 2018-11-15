@@ -35,7 +35,6 @@ export class BlackCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCard(this.start, 20);
   }
 
   getCard(start, limit) {
@@ -52,7 +51,22 @@ export class BlackCardComponent implements OnInit {
       },
       onPostExecute: ((data, err) => {
         if (err === undefined && data.code === 200) {
-          this.cards = data.map.cards;
+          if (this.cards === undefined) {
+            this.cards = data.map.cards;
+          } else {
+            for (let i = 0; i < data.map.cards.length; i++) {
+              this.cards.push(data.map.cards[i]);
+            }
+          }
+          this.start += 20;
+          this.isLoadMore = data.map.cards.length > 0;
+          if (!this.isLoadMore) {
+            this.alert.show({
+              type: 'danger',
+              title: '提示',
+              content: '没有数据辣...'
+            });
+          }
         } else {
           console.log(err);
           this.alert.show({
@@ -71,6 +85,7 @@ export class BlackCardComponent implements OnInit {
 
   enter() {
     this.showContent = true;
+    this.getCard(this.start, 20);
   }
 
   cardBgChange() {
@@ -172,6 +187,10 @@ export class BlackCardComponent implements OnInit {
           }
         });
     }
+  }
+
+  loadMore() {
+    this.getCard(this.start, 20);
   }
 
 }
