@@ -1,0 +1,29 @@
+<div class="line-wrapper">
+  <div class="line-left">
+    <div style="float: left" class="time">
+      {{time}}
+    </div>
+    <div class="timeline" id="{{id}}">
+    </div>
+    <div class="dot" (click)="hide()">
+      {{addText}}
+    </div>
+  </div>
+  <div class="line-right" #cardContainer>
+    <div *ngIf="isExtend">
+      <mdb-card *ngFor="let card of cards" class="line-item">
+        <img src="{{getUrl(card.content)}}">
+        <div class="info flex-center">
+          <p>{{getContent(card.content)}}</p>
+        </div>
+        <div class="author">
+          By: {{card.author.nickname}} at {{card.datetime}}
+        </div>
+      </mdb-card>
+    </div>
+    <div *ngIf="!isExtend">
+      <small class="text-info">收起{{cards.length}}条内容</small>
+    </div>
+  </div>
+</div>
+<div style="clear: both"></div>

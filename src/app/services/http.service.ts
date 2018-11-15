@@ -193,4 +193,28 @@ export class HttpService {
       error: err => handler.onPostExecute(undefined, err)
     });
   }
+
+  getCards(pagination, handler: HttpServiceHandler) {
+    handler.onPreExecute();
+    this.http.get(this.api.getCards(), {
+      headers: this.authorization,
+      params: pagination
+    }).subscribe({
+      next: value => handler.onPostExecute(value, undefined),
+      error: err => handler.onPostExecute(undefined, err)
+    });
+  }
+
+  addCard(card, handler: HttpServiceHandler) {
+    handler.onPreExecute();
+    const body = new FormData();
+    body.set('content', card.content);
+    body.set('author.account', card.author);
+    this.http.post(this.api.addCard(), body, {
+      headers: this.authorization
+    }).subscribe({
+      next: value => handler.onPostExecute(value, undefined),
+      error: err => handler.onPostExecute(undefined, err)
+    });
+  }
 }

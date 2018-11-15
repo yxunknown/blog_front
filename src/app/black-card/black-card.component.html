@@ -4,17 +4,16 @@
       <h4><i class="fa fa-lock"></i></h4>
     </mdb-card-header>
     <mdb-card-body class="elegant-color white-text">
-      <small>&emsp; Don't you just take the past and put it in a room in the basement,
+      <small>&nbsp;&nbsp;&nbsp;&nbsp;Don't you just take the past and put it in a room in the basement,
         and lock the door and never go in there? That' s what i do.
         And then you meet someone special, and all you want to do is toss them the key.
         Say: "Open up, Step inside". But you can't... because it's dark... and there are demons.
         And if anybody saw how ugly it is...
       </small>
       <br>
-      <small>&emsp; 你不会将过去放进地下室的房间里吗？锁上门，再也不走进去？那是我会做的。然后你遇到一个对你而言特别的人，
-        你想做的只是扔给他这把钥匙，说‘开了，进来吧’。
-        但是你不能，因为里面很黑，还有恶魔，一旦有人看见里面有多肮脏…
-        我一直都想，冲开门，让阳光洒进来，把一切都清洗干净。
+      <small>&emsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;你不會將過去放進地下室的房間裡嗎？鎖上門，再也不走進去？那是我會做的。然後你遇到一個對你而言特別的人， 你想做的只是扔給他這把鑰匙，說‘開了，進來吧’。
+        但是你不能，因為裡面很黑，還有惡魔，一旦有人看見裡面有多骯髒… 我一直都想，沖開門，讓陽光灑進來，把一切都清洗乾淨。
       </small>
       <br>
       <small class="float-right"><span class="font-italic">The Talented Mr. Ripley</span></small>
@@ -38,7 +37,7 @@
   </mdb-card>
   <div class="black-container fadeIn" *ngIf="showContent">
     <div class="row float-right fixed-top fixed">
-      <div class="flex">
+      <div class="flex" style="margin-top: 10px">
         <button mdbBtn type="button"
                 mdbTooltip="返回主页"
                 placement="left"
@@ -46,42 +45,78 @@
                 color="dark-green" size="sm" class="waves-light form-item"
                 mdbWavesEffect><i class="fa fa-arrow-left"></i></button>
         <button mdbBtn type="button"
+                *ngIf="isAdmin"
+                (click)="basicModal.show()"
                 color="unique" size="sm" class="waves-light form-item"
                 mdbWavesEffect><i class="fa fa-edit"></i></button>
       </div>
     </div>
     <div style="clear: both"></div>
-    <div class="row">
-      <div class="col-9">
-        <div class="cards">
-          <div class="card-item">
-            <mdb-card>
-              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-                <!-- Card img -->
-              </div>
-              <!--Card content-->
-              <mdb-card-body>
-                <!--Title-->
-                <mdb-card-text>正在开发...
-                </mdb-card-text>
 
-              </mdb-card-body>
-            </mdb-card>
-          </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="cards">
+          <app-timeline *ngFor="let card of cards" [cards]="card.cards" [time]="card.datetime"></app-timeline>
+          <button mdbBtn color="primary" size="sm" *ngIf="isLoadMore">加载更多</button>
         </div>
       </div>
-
-
-      <div class="col-3">
+      <div class="col-6">
         <div class="left">
-          <mdb-card>
-            <mdb-card-body>
-              <small>just bb something here</small>
-              <br>
-            </mdb-card-body>
-          </mdb-card>
+          <p>
+            <small class="text-danger text-sm-center"
+                   style="font-size: small; font-weight: normal;">
+              The only thing you should fight against, is darkness inside of your heart.<br>
+              战胜内心的黑暗吧.
+            </small>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark white-text text-center">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true" class="text-danger">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel" style="width: 100%">创建小黑卡
+          <p>
+            <small class="white-text text-sm-center"
+                   style="font-size: small; font-weight: normal;">
+              The only thing you should fight against, is darkness inside of your heart.<br>
+              战胜内心的黑暗吧.
+            </small>
+          </p>
+        </h4>
+      </div>
+      <div class="modal-body" style="padding: 0">
+        <div style="width: 100%; height: 200px; overflow: hidden;">
+          <img style="width: 100%; height: 200px; object-fit: cover"
+               id="cardBgPreviewer"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpHosYIUU_QZDcsw5OQBKYCBEaZU5pIn4oOExCKETGY7t5LfIr">
+          <div class="flex-center card-input">
+            <textarea id="cardContent" class="card-editor"></textarea>
+          </div>
+        </div>
+        <input type="file" #inputFile style="display: none;" accept="image/bmp, image/jpeg, image/png"
+               id="cardBgInput" (change)="cardBgChange()">
+        <button mdbBtn block="true" color="primary" size="sm" mdbWavesEffect=""
+                style="margin-top: 10px"
+                (click)="inputFile.click()">选择背景</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                (click)="basicModal.hide()" mdbWavesEffect>取消
+        </button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light"
+                (click)="addCard()"
+                mdbWavesEffect>提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-alert></app-alert>

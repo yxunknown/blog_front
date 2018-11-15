@@ -1,0 +1,90 @@
+.line-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.line-left {
+  float: left;
+  width: 100px;
+  height: 100%;
+  padding: 0;
+}
+
+.line-right {
+  float: left;
+  width: calc(100% - 100px);
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 20px;
+}
+
+.line-item {
+  margin-top: 10px;
+  width: 90%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.line-item:first-child {
+  margin-top: 0;
+}
+
+.timeline {
+  float: left;
+  width: 1px;
+  margin-left: 15px;
+  display: block;
+  background-color: #9a9a9a;
+  margin-top: 0;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin-top: 2px;
+  margin-left: -8px;
+  color: white;
+  border-radius: 10px;
+  padding: 0;
+  text-align: center;
+  line-height: 15px;
+  background-color: #007bff;
+}
+
+.dot i {
+  margin: 0;
+}
+
+.time {
+  color: #8590a6;
+  font-size: small;
+  font-weight: bold;
+}
+
+mdb-card img {
+  width: 100%;
+  border-radius: 0.25em;
+  max-height: 200px;
+}
+
+.info {
+  border-radius: 0.25em;
+  text-align: center;
+  background-color: rgba(21, 21, 21, 0.4);
+  color: white;
+  width: 100%;
+  font-size: small;
+  height: 200px;
+  position: absolute;
+}
+.author {
+  position: absolute;
+  z-index: 100;
+  text-align: center;
+  font-size: 10px;
+  width: 100%;
+  height: 20px;
+  color: white;
+  margin-top: 180px;
+}

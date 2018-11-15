@@ -58,4 +58,11 @@ export class ApiService {
   getAlbumPhotos() {
     return `${BASE_URL}/${API_PREFIX}/photo-provider/photo/album`;
   }
+
+  getCards() {
+    return `${BASE_URL}/${API_PREFIX}/card-provider/card`;
+  }
+  addCard() {
+    return `${BASE_URL}/${API_PREFIX}/card-provider/card`;
+  }
 }
