@@ -1,13 +1,6 @@
 <div class="content-container" xmlns="http://www.w3.org/1999/html">
   <app-nav [index]="1"></app-nav>
   <div class="container album-container" id="albumContainer">
-    <div class="row list" *ngIf="loading">
-      <div class="progress" style="width: 100%">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
-          數據加載中...
-        </div>
-      </div>
-    </div>
     <div *ngFor="let row of albumSet" class="row list">
       <div *ngFor="let album of row " class="col album">
         <mdb-card >
@@ -30,6 +23,7 @@
       <button mdbBtn type="button" color="primary"
               mdbTooltip="上一页"
               placement="left"
+              (click)="pre()"
               size="sm" class="waves-light float-left pagination-btn" mdbWavesEffect>
         <i class="fa fa-arrow-left"></i>
       </button>
@@ -42,6 +36,7 @@
       <button mdbBtn type="button" color="primary"
               mdbTooltip="下一页"
               placement="right"
+              (click)="post()"
               size="sm" class="waves-light float-left pagination-btn" mdbWavesEffect>
         <i class="fa fa-arrow-right"></i>
       </button>

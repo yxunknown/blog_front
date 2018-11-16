@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import marked from 'marked';
+import hljs from 'highlight.js';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -33,6 +35,11 @@ export class ArticleComponent implements OnInit, AfterViewInit {
         this.container.nativeElement.innerHTML = img + this.container.nativeElement.innerHTML;
         this.isShowCover = false;
       }
+      // code highlight
+      $('pre code').each((i, block) => {
+        hljs.highlightBlock(block);
+      });
+
     } else {
       this.container.nativeElement.style.height = '100px';
       this.btnShowAll.nativeElement.innerText = '展开全文';

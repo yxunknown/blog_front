@@ -2,7 +2,7 @@
   <div *ngIf="isShowContent">
     <app-article *ngFor="let article of articles" [article]="article"></app-article>
   </div>
-  <mdb-card *ngIf="isShowLoading">
+  <mdb-card *ngIf="isShowLoading" style="margin-top: 20px">
     <mdb-card-body>
       <li class="loading" style="width: 10%"></li>
       <li class="loading" style="width: 30%"></li>

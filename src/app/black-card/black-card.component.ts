@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import {AlertService} from '../services/alert.service';
 import {TokenService} from '../services/token.service';
 import {CosService} from '../services/cos.service';
+import Nprogress from 'nprogress';
 
 @Component({
   selector: 'app-black-card',
@@ -43,13 +44,10 @@ export class BlackCardComponent implements OnInit {
       limit: limit
     }, {
       onPreExecute: () => {
-        this.alert.show({
-          type: 'info',
-          title: '提示',
-          content: '正在获取内容'
-        });
+        Nprogress.start();
       },
       onPostExecute: ((data, err) => {
+        Nprogress.done();
         if (err === undefined && data.code === 200) {
           if (this.cards === undefined) {
             this.cards = data.map.cards;
@@ -125,8 +123,10 @@ export class BlackCardComponent implements OnInit {
         author: `${author}`
       }, {
         onPreExecute: () => {
+          Nprogress.start();
         },
         onPostExecute: (result, error) => {
+          Nprogress.done();
           if (error === undefined && result.code === 200) {
             this.alert.show({
               type: 'success',

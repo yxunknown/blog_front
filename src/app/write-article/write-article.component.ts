@@ -10,7 +10,7 @@ import {AlertService} from '../services/alert.service';
 import {TokenService} from '../services/token.service';
 import {StorageService} from '../services/storage.service';
 import {Router} from '@angular/router';
-
+import Nprogress from 'nprogress';
 @Component({
   selector: 'app-write-article',
   templateUrl: './write-article.component.html',
@@ -190,8 +190,10 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
     };
     this.http.addArticle(article, {
       onPreExecute: () => {
+        Nprogress.start();
       },
       onPostExecute: (data, err) => {
+        Nprogress.done();
         if (err === undefined && data.code === 200) {
           this.alert.show({
             type: 'success',
@@ -199,6 +201,11 @@ export class WriteArticleComponent implements OnInit, AfterViewInit {
             content: '发布文章成功'
           });
         } else {
+          this.alert.show({
+            type: 'danger',
+            title: '提示',
+            content: '发布文章失敗'
+          });
           console.log(err);
         }
       }

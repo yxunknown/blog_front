@@ -8,6 +8,7 @@ import {AlertService} from '../services/alert.service';
 import * as $ from 'jquery';
 import {CosService} from '../services/cos.service';
 import {TokenService} from '../services/token.service';
+import Nprogress from 'nprogress';
 
 @Component({
   selector: 'app-album-detail',
@@ -25,7 +26,6 @@ export class AlbumDetailComponent implements OnInit {
   currentPage = 1;
   totalPage = 1;
   isAdmin: boolean;
-  isLoading: boolean;
   constructor(private storage: StorageService,
               private routeInfo: ActivatedRoute,
               private http: HttpService,
@@ -35,25 +35,61 @@ export class AlbumDetailComponent implements OnInit {
     this.album = this.storage.getAlbum(routeInfo.params['value'].id);
     this.start = 0;
     this.photoCount = 0;
-    this.isLoading = true;
     this.isAdmin = this.token.isAdmin();
   }
 
   ngOnInit() {
+    this.getPhotos(this.start, 16);
+  }
+  getPhotos(start, limit) {
     this.http.getAlbumPhotos(this.album.id, {
-      start: this.start,
-      limit: 16
+      start: start,
+      limit: limit
     }, {
-      onPreExecute: () => { this.isLoading = true},
+      onPreExecute: () => {
+        Nprogress.start();
+      },
       onPostExecute: ((data, err) => {
-        this.isLoading = false;
+        Nprogress.done();
         if (err === undefined && data.code === 200) {
           this.photoCount = data.map.count;
           this.totalPage = Math.ceil(this.photoCount / 16);
           this.renderPhoto(data.map.photos);
+        } else {
+          this.alert.show({
+            type: 'danger',
+            title: '提示',
+            content: '获取照片数据失败'
+          });
         }
       })
     });
+  }
+  pre() {
+    if (this.currentPage - 1 < 1) {
+      this.alert.show({
+        type: 'warning',
+        title: '提示',
+        content: '已经是第一页了'
+      });
+      return;
+    } else {
+      this.currentPage--;
+      this.getPhotos((this.currentPage - 1) * 16, 16);
+    }
+  }
+  post() {
+    if (this.currentPage + 1 > this.totalPage) {
+      this.alert.show({
+        type: 'warning',
+        title: '提示',
+        content: '已经是最后一页了'
+      });
+      return;
+    } else {
+      this.currentPage++;
+      this.getPhotos((this.currentPage - 1) * 16, 16);
+    }
   }
 
   preview(index) {
@@ -149,14 +185,18 @@ export class AlbumDetailComponent implements OnInit {
   renderPhoto(photos) {
     this.photos = [];
     let col = [];
+    this.photoPreview = [];
     for (let i = 1; i <= photos.length; i++) {
       col.push(photos[i - 1]);
-      this.photoPreview.push({
-        src: `${photos[i - 1].path}`,
-        w: 1280,
-        h: 720,
+      const img = new Image();
+      img.src = `${photos[i - 1].path}`;
+      const imgItem = {
+        src: `${img.src}`,
+        w: img.width,
+        h: img.height,
         title: `${photos[i - 1].description}`,
-      });
+      };
+      this.photoPreview.push(imgItem);
       if (i % 4 === 0) {
         this.photos.push(col);
         col = [];

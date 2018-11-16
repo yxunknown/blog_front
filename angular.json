@@ -33,6 +33,7 @@
               "node_modules/photoswipe/dist/photoswipe.css",
               "node_modules/photoswipe/dist/default-skin/default-skin.css",
               "src/lib/markdown.stylish.css",
+              "node_modules/nprogress/nprogress.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -46,6 +47,7 @@
               "node_modules/stackedit-js/docs/lib/stackedit.min.js",
               "node_modules/marked/marked.min.js",
               "node_modules/highlight.js/lib/highlight.js",
+              "node_modules/nprogress/nprogress.js",
               "src/lib/cos-js-sdk-v5.min.js"
             ]
           },

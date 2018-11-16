@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../services/api.service';
 import {TokenService} from '../services/token.service';
-import {e} from '@angular/core/src/render3';
 import {AlertService} from '../services/alert.service';
+import NProgress from 'nprogress';
 
 @Component({
   selector: 'app-login',
@@ -40,13 +40,10 @@ export class LoginComponent implements OnInit {
       const data = new FormData();
       data.set('account', this.username.toString());
       data.set('password', this.password.toString());
-      this.alert.show({
-        type: 'success',
-        title: '提示',
-        content: '正在登录中,请稍候....'
-      });
+      NProgress.start();
       this.http.post(this.api.token(), data).subscribe(
         value => {
+          NProgress.done();
           status = value['info'];
           if (status === '登录成功') {
             this.token.setToken(value['map']['token']['token'], value['map']['token']['refreshToken']);
@@ -57,6 +54,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error1 => {
+          NProgress.done();
           this.alert.show({
             type: 'danger',
             title: '提示',

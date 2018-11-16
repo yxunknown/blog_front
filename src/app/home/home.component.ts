@@ -3,6 +3,7 @@ import {TokenService} from '../services/token.service';
 import {DialogService} from '../services/dialog.service';
 import {HttpService} from '../services/http.service';
 import {Router} from '@angular/router';
+import Nprogress from 'nprogress';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    Nprogress.start();
     this.http.getArticleCount({
       onPreExecute: () => {
       },
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       onPreExecute: () => {
       },
       onPostExecute: (data, err) => {
+        Nprogress.done();
         if (err === undefined && data.code === 200) {
           this.movieCount = data.map.count;
         } else {

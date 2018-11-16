@@ -29,6 +29,7 @@ import {HttpService} from './services/http.service';
 import {StorageService} from './services/storage.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { TimelineComponent } from './timeline/timeline.component';
+import { TodayComponent } from './today/today.component';
 
 
 const appRoutes: Routes = [
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     DialogComponent,
     AlertComponent,
     ArticleComponent,
-    TimelineComponent
+    TimelineComponent,
+    TodayComponent
   ],
   imports: [
     BrowserModule,

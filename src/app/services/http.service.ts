@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {TokenService} from './token.service';
-import {a} from '@angular/core/src/render3';
+import {a, e} from '@angular/core/src/render3';
 import {until} from 'selenium-webdriver';
 import urlContains = until.urlContains;
 import {validate} from 'codelyzer/walkerFactory/walkerFn';
@@ -215,6 +215,13 @@ export class HttpService {
     }).subscribe({
       next: value => handler.onPostExecute(value, undefined),
       error: err => handler.onPostExecute(undefined, err)
+    });
+  }
+  getTime(handle: HttpServiceHandler) {
+    handle.onPreExecute();
+    this.http.get(this.api.getTime()).subscribe({
+      next: value => handle.onPostExecute(value, undefined),
+      error: err => handle.onPostExecute(undefined, err)
     });
   }
 }

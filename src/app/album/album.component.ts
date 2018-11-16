@@ -6,6 +6,7 @@ import {CosService} from '../services/cos.service';
 import {AlertService} from '../services/alert.service';
 import {StorageService} from '../services/storage.service';
 import {TokenService} from '../services/token.service';
+import Nprogress from 'nprogress';
 
 @Component({
   selector: 'app-album',
@@ -20,7 +21,6 @@ export class AlbumComponent implements OnInit {
   albumCount: number;
   isCoverUploading: boolean;
   coverId: any;
-  loading = true;
   isAdmin: boolean;
 
   constructor(private route: Router,
@@ -38,17 +38,27 @@ export class AlbumComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAlbums(this.start,  9);
+  }
+
+  getAlbums(start, limit) {
     this.http.getAlbums({
-      start: this.start,
-      limit: 9}, {
+      start: start,
+      limit: limit}, {
       onPreExecute: () => {
-        this.loading = true;
+        Nprogress.start();
       },
       onPostExecute: ((data, err) => {
-        this.loading = false;
+        Nprogress.done();
         if (err === undefined && data.code === 200) {
           this.albumCount = data.map.count;
           this.renderAlbums(data.map.albums);
+        } else {
+          this.alert.show({
+            type: 'danger',
+            title: '提示',
+            content: '获取相册数据失败'
+          });
         }
       })
     });
@@ -127,6 +137,33 @@ export class AlbumComponent implements OnInit {
 
   getPages(): number {
     return Math.ceil(this.albumCount / 9);
+  }
+
+  pre() {
+    if (this.currentPage - 1 < 1) {
+      this.alert.show({
+        type: 'warning',
+        title: '提示',
+        content: '已经是第一页了'
+      });
+      return;
+    } else {
+      this.currentPage--;
+      this.getAlbums((this.currentPage - 1) * 9, 9);
+    }
+  }
+  post() {
+    if (this.currentPage + 1 > this.getPages()) {
+      this.alert.show({
+        type: 'warning',
+        title: '提示',
+        content: '已经是最后一页了'
+      });
+      return;
+    } else {
+      this.currentPage++;
+      this.getAlbums((this.currentPage - 1) * 9, 9);
+    }
   }
 
   addAlbum() {

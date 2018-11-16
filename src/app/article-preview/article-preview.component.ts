@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {TokenService} from '../services/token.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../services/api.service';
+import Nprogress from 'nprogress';
 
 @Component({
   selector: 'app-article-preview',
@@ -38,6 +39,7 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
   }
 
   getArticle(start, limit) {
+    Nprogress.start();
     const header = {
       authorization: `Bearer ${this.token.getToken()}`
     };
@@ -50,6 +52,7 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
       params: params
     }).subscribe({
       next: value => {
+        Nprogress.done();
         if (value['code'] === 200) {
           // receive data successful
           // dismiss loading component and show content area
@@ -68,6 +71,7 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
         }
       },
       error: err => {
+        Nprogress.done();
         console.log(err);
       }
     });

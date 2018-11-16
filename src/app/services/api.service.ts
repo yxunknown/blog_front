@@ -65,4 +65,9 @@ export class ApiService {
   addCard() {
     return `${BASE_URL}/${API_PREFIX}/card-provider/card`;
   }
+
+  getTime() {
+    // get time from taobao
+    return 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp';
+  }
 }

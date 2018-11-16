@@ -1,6 +1,9 @@
 mdb-card {
   margin-top: 15px;
 }
+mdb-card:last-child {
+  margin-bottom: 15px;
+}
 .article-info {
   list-style: none;
   padding: 0;
