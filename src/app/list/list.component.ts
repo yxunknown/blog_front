@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../services/http.service';
 import Nprogress from 'nprogress';
 import {AlertService} from '../services/alert.service';
+import {StorageService} from '../services/storage.service';
 
 const TYPE_MUSIC = 9;
 const TYPE_MOVIE = 8;
@@ -23,7 +24,9 @@ export class ListComponent implements OnInit {
   constructor(
     private routeInfo: ActivatedRoute,
     private http: HttpService,
-    private alert: AlertService
+    private alert: AlertService,
+    private storage: StorageService,
+    private route: Router
   ) {
     this.type = routeInfo.params['value'].type;
     this.type = this.type.toUpperCase();
@@ -128,6 +131,12 @@ export class ListComponent implements OnInit {
 
   loadMore() {
     this.getArticle(this.start, 20);
+  }
+
+  toArticle(article) {
+    console.log(article);
+    this.storage.storageArticle(article.id, article);
+    this.route.navigate(['/list/cat/', article.id]);
   }
 
 }

@@ -1,0 +1,25 @@
+.top-bg {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: center center repeat-x white;
+  color: black;
+  font-family: Times, sans-serif;
+}
+.top-bg h1 {
+  text-shadow: 1px 1px white;
+}
+.article {
+  width: 60%;
+  margin-left: 20%;
+}
+.article-wrapper {
+  width: 100%;
+  height: calc(100% - 210px);
+  margin-top: 210px;
+  overflow-y: scroll;
+}
+.article-container {
+  background-color: white;
+  overflow: hidden;
+}

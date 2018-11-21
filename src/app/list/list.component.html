@@ -16,7 +16,7 @@
         <div class="list-item-date">
           {{getDate(article.datetime)}}
         </div>
-        <div class="list-item-container waves-light" mdbWavesEffect>
+        <div class="list-item-container waves-light" mdbWavesEffect (click)="toArticle(article)">
           {{article.title}}
         </div>
       </div>
