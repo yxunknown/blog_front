@@ -3,6 +3,7 @@ import {TokenService} from '../services/token.service';
 import {HttpClient} from '@angular/common/http';
 import {ApiService} from '../services/api.service';
 import Nprogress from 'nprogress';
+import {AlertService} from "../services/alert.service";
 
 @Component({
   selector: 'app-article-preview',
@@ -19,7 +20,8 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
   constructor(
     private token: TokenService,
     private http: HttpClient,
-    private api: ApiService) {
+    private api: ApiService,
+    private alert: AlertService) {
     this.start = 0;
   }
 
@@ -73,6 +75,11 @@ export class ArticlePreviewComponent implements OnInit, AfterViewInit {
       error: err => {
         Nprogress.done();
         console.log(err);
+        this.alert.show({
+          type: 'danger',
+          title: '错误',
+          content: '获取文章列表出错，请重试!'
+        });
       }
     });
   }

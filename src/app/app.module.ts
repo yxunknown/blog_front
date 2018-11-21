@@ -30,6 +30,7 @@ import {StorageService} from './services/storage.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { TimelineComponent } from './timeline/timeline.component';
 import { TodayComponent } from './today/today.component';
+import { ListComponent } from './list/list.component';
 
 
 const appRoutes: Routes = [
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
   {path: 'album', component: AlbumComponent},
   {path: 'album/:id', component: AlbumDetailComponent},
   {path: 'article/write', component: WriteArticleComponent},
-  {path: 'photo/upload', component: UploadPhotoComponent}
+  {path: 'photo/upload', component: UploadPhotoComponent},
+  {path: 'list/:type', component: ListComponent}
 ];
 
 @NgModule({
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     AlertComponent,
     ArticleComponent,
     TimelineComponent,
-    TodayComponent
+    TodayComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

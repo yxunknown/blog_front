@@ -1,0 +1,73 @@
+.top-bg {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: center center no-repeat;
+  color: white;
+  font-family: Times, sans-serif;
+}
+.list-container {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 210px;
+}
+.year-list-item {
+
+}
+.year-info {
+  color: black;
+  font-weight: bolder;
+  font-size: 25px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.year-info:first-child {
+  margin-top: 0;
+}
+.list-item {
+  height: 30px;
+  width: 100%;
+  margin-top: 5px;
+}
+.list-item:first-child {
+  margin-top: 0;
+}
+.list-item-date {
+  width: 100px;
+  float: left;
+  text-align: right;
+  padding-right: 15px;
+  line-height: 30px;
+  font-weight: bold;
+}
+.list-item-container {
+  width: calc(100% - 100px);
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-left: 100px;
+  padding-left: 10px;
+  text-align: left;
+  line-height: 30px;
+}
+.list-item-container:hover {
+  background-color: rgba(30, 19, 29, 0.4);
+  color: white;
+}
+.logo {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: bolder;
+  color: #D1223E;
+}
+.logo img {
+  height: 40px;
+  width: 40px;
+}
+.logo a {
+  color: #D1223E;
+  margin-left: 5px;
+}
+.logo a:hover {
+  color: #007bff;
+}

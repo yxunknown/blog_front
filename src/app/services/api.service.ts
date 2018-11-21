@@ -70,4 +70,8 @@ export class ApiService {
     // get time from taobao
     return 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp';
   }
+
+  getArticleBySelection() {
+    return `${BASE_URL}/${API_PREFIX}/article-provider/articles`;
+  }
 }
