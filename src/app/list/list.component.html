@@ -6,36 +6,24 @@
   <div class="list-container">
     <div class="logo">
       <img src="https://photo-1253210260.cos.ap-chengdu.myqcloud.com/cat.png">
-      <a href="/#/home">她的貓</a> / 音樂
+      <a href="/#/home">她的貓</a> / {{type}}
     </div>
-    <div class="year-list-item">
+    <div class="year-list-item" *ngFor="let col of articles">
       <div class="year-info">
-        2018 年
+        {{col.year}} 年
       </div>
-      <div class="list-item">
+      <div class="list-item" *ngFor="let article of col.articles">
         <div class="list-item-date">
-          11 Jan
+          {{getDate(article.datetime)}}
         </div>
-        <div class="list-item-container">
-          你好萬達
-        </div>
-      </div>
-      <div class="list-item">
-        <div class="list-item-date">
-          11 Jan
-        </div>
-        <div class="list-item-container">
-          你好萬達
-        </div>
-      </div>
-      <div class="list-item">
-        <div class="list-item-date">
-          11 Jan
-        </div>
-        <div class="list-item-container">
-          你好萬達
+        <div class="list-item-container waves-light" mdbWavesEffect>
+          {{article.title}}
         </div>
       </div>
     </div>
+
+    <button type="button" block="true" size="sm" style="margin-top: 20px; margin-left: 0;" *ngIf="shouldLoadMore"
+            (click)="loadMore()"
+            mdbBtn color="primary" mdbWavesEffect>{{loadText}}</button>
   </div>
 </div>

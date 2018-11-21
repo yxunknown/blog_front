@@ -81,4 +81,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   toUpload() {
     this.route.navigate(['/photo/upload']);
   }
+
+  toMusic() {
+    this.route.navigate(['/list/', 'music']);
+  }
+
+  toMovie() {
+    this.route.navigate(['/list/', 'movie']);
+  }
+  toArticle() {
+    this.route.navigate(['/list/', 'article']);
+  }
 }

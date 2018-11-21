@@ -226,7 +226,7 @@ export class HttpService {
 
   getArticleBySelection(selection, handler: HttpServiceHandler) {
     handler.onPreExecute();
-    this.http.get(this.api.getArticleCountBySelection(), {
+    this.http.get(this.api.getArticleBySelection(), {
       params: selection,
       headers: this.authorization
     }).subscribe({

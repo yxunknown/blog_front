@@ -18,6 +18,7 @@ export class ListComponent implements OnInit {
   start: number;
   articles: any;
   shouldLoadMore: boolean;
+  loadText: string;
 
   constructor(
     private routeInfo: ActivatedRoute,
@@ -25,8 +26,10 @@ export class ListComponent implements OnInit {
     private alert: AlertService
   ) {
     this.type = routeInfo.params['value'].type;
+    this.type = this.type.toUpperCase();
     this.start = 0;
     this.shouldLoadMore = true;
+    this.loadText = '加载更多';
   }
 
   ngOnInit() {
@@ -35,13 +38,13 @@ export class ListComponent implements OnInit {
 
   getArticle(start, limit) {
     let select = {};
-    if (this.type === 'music') {
+    if (this.type === 'MUSIC') {
       select = {
         start: start,
         limit: limit,
         'catalog.id': TYPE_MUSIC
       };
-    } else if (this.type === 'movie') {
+    } else if (this.type === 'MOVIE') {
       select = {
         start: start,
         limit: limit,
@@ -56,9 +59,11 @@ export class ListComponent implements OnInit {
     this.http.getArticleBySelection(select, {
       onPreExecute: () => {
         Nprogress.start();
+        this.loadText = '数据加载中, 请稍候...';
       },
       onPostExecute: (data, err) => {
         Nprogress.done();
+        this.loadText = '加载更多';
         if (err === undefined && data.code === 200) {
           const articles = data.map.articles;
           this.render(articles);
@@ -77,6 +82,11 @@ export class ListComponent implements OnInit {
     this.start += 20;
     if (articles.length <= 0) {
       this.shouldLoadMore = false;
+      this.alert.show({
+        type: 'info',
+        title: '提示',
+        content: '没有更多数据了'
+      });
       return;
     }
     if (this.articles === undefined) {
@@ -110,4 +120,14 @@ export class ListComponent implements OnInit {
     }
     console.log(this.articles);
   }
+  getDate(datetime: string) {
+    const date = new Date(datetime).toString();
+    const ymd = date.split(' ');
+    return ymd[2] + ' ' + ymd[1];
+  }
+
+  loadMore() {
+    this.getArticle(this.start, 20);
+  }
+
 }

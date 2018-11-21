@@ -32,7 +32,7 @@
           <mdb-card-body class="content-body">
             <ul class="content-list">
               <li class="waves-ripple" mdbWavesEffect>
-                <div class="content-list-item">
+                <div class="content-list-item" (click)="toArticle()">
                   <i class="fa fa-archive"></i> 文章 <span class="info-badge">{{articleCount}}</span>
                 </div>
               </li>
@@ -42,11 +42,11 @@
                 </div>
               </li>
               <li class="waves-ripple" mdbWavesEffect>
-                <div class="content-list-item">
+                <div class="content-list-item" (click)="toMusic()">
                   <i class="fa fa-music"></i> 歌单 <span class="info-badge">{{musicCount}}</span>
                 </div>
               <li class="waves-ripple" mdbWavesEffect>
-                <div class="content-list-item">
+                <div class="content-list-item" (click)="toMovie()">
                   <i class="fa fa-video-camera"></i> 电影 <span class="info-badge">{{movieCount}}</span>
                 </div>
               </li>
